@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.swing.JComboBox;
+import javax.swing.JComboBox;  
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 

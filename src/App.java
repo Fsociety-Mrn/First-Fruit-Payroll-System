@@ -5,8 +5,8 @@ public class App {
 		// TODO Auto-generated method stub
 		System.out.println("App is Running....");
 		
-//		new Login().setVisible(true);
-		new Database().createDatabase();
+		new Login().setVisible(true);
+
 	}
 
 }
