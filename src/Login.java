@@ -10,6 +10,7 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
@@ -17,11 +18,14 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import javax.swing.JRadioButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 
 
@@ -66,7 +70,7 @@ public class Login extends JFrame {
 			JRadioButton adminButton = new JRadioButton("Admin");
 			
 	        // Set the preferred size of the frame
-	        setPreferredSize(new Dimension(600, 450));
+	        setPreferredSize(new Dimension(700, 500));
 
 	        // Pack the components of the frame to calculate the preferred size
 	        pack();
@@ -74,6 +78,7 @@ public class Login extends JFrame {
 	        
 	        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	        setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+	        
 	        getContentPane().setLayout(null);
 	        
 	        JLabel BrandTitle = new JLabel("First Fruit");
@@ -94,14 +99,28 @@ public class Login extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
-			JLabel brandTitle = new JLabel("First Fruit");
+			JLabel brandTitle = new JLabel();
+			ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+
+			brandTitle.setPreferredSize(new Dimension(300, 130)); // Set a preferred size for the label
+
+			Image img = icon.getImage();
+			Image imgScale = img.getScaledInstance(brandTitle.getPreferredSize().width, brandTitle.getPreferredSize().height, Image.SCALE_SMOOTH);
+			ImageIcon newIcon = new ImageIcon(imgScale);
+
+			brandTitle.setIcon(newIcon);
+
+
+			// Add the brandTitle to the frame or panel as necessary
+
+			
 			brandTitle.setHorizontalAlignment(SwingConstants.CENTER);
 			brandTitle.setFont(new Font("Segoe UI", Font.PLAIN, 43));
-			brandTitle.setBounds(10, 26, 580, 75);
+			brandTitle.setBounds(192, 11, 367, 160);
 			contentPane.add(brandTitle);
 			
 			JLabel lblSwitchTo = new JLabel("switch to");
-			lblSwitchTo.setBounds(193, 126, 85, 22);
+			lblSwitchTo.setBounds(245, 182, 85, 22);
 			contentPane.add(lblSwitchTo);
 			lblSwitchTo.setHorizontalAlignment(SwingConstants.CENTER);
 			lblSwitchTo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -117,7 +136,7 @@ public class Login extends JFrame {
 			});
 			adminButton.setFont(new Font("Segoe UI", Font.PLAIN, 11));
 			adminButton.setHorizontalAlignment(SwingConstants.CENTER);
-			adminButton.setBounds(284, 127, 68, 23);
+			adminButton.setBounds(336, 182, 68, 23);
 			contentPane.add(adminButton);
 			
 
@@ -130,52 +149,78 @@ public class Login extends JFrame {
 			});
 			employeeButton.setHorizontalAlignment(SwingConstants.CENTER);
 			employeeButton.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-			employeeButton.setBounds(354, 127, 85, 23);
+			employeeButton.setBounds(406, 182, 85, 23);
 			contentPane.add(employeeButton);
 			
 
 			employee.setLayout(null);
 			employee.setBackground(Color.WHITE);
-			employee.setBounds(10, 159, 580, 280);
+			employee.setBounds(10, 213, 680, 276);
 			contentPane.add(employee);
 			
 			employeeUsername = new JTextField();
 			employeeUsername.setHorizontalAlignment(SwingConstants.CENTER);
 			employeeUsername.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 			employeeUsername.setColumns(10);
-			employeeUsername.setBounds(10, 58, 560, 53);
+			employeeUsername.setBounds(48, 11, 586, 53);
 			employee.add(employeeUsername);
 			
 			employeePasswors = new JPasswordField();
 			employeePasswors.setHorizontalAlignment(SwingConstants.CENTER);
 			employeePasswors.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-			employeePasswors.setBounds(10, 122, 560, 53);
+			employeePasswors.setBounds(48, 76, 586, 53);
 			employee.add(employeePasswors);
 			
-			Button button_1 = new Button("Login as Employee");
-			button_1.setBounds(192, 209, 184, 43);
-			employee.add(button_1);
+			Button employeeLogin = new Button("Login as Employee");
+			employeeLogin.setBounds(229, 171, 263, 43);
+			employee.add(employeeLogin);
 			
 
 			admin.setBackground(Color.WHITE);
-			admin.setBounds(10, 159, 580, 280);
+			admin.setBounds(10, 213, 680, 276);
 			contentPane.add(admin);
 			admin.setLayout(null);
 			
 			userField = new JTextField();
+			userField.setHorizontalAlignment(SwingConstants.CENTER);
 			userField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-			userField.setBounds(10, 40, 560, 53);
+			userField.setBounds(48, 11, 586, 53);
 			admin.add(userField);
 			userField.setColumns(10);
 			
 			passwordField = new JPasswordField();
+			passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 			passwordField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-			passwordField.setBounds(10, 104, 560, 53);
+			passwordField.setBounds(48, 76, 586, 53);
 			admin.add(passwordField);
 			
 			Button button = new Button("Login as Admin");
-			button.setBounds(192, 209, 184, 43);
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					String username = userField.getText();
+					String password = passwordField.getText();
+					
+					if (new Database().loginAdmin(username, password)) {
+						
+						new ADMIN().setVisible(true);
+						dispose();
+					};
+				}
+				
+			});
+			button.setBounds(225, 171, 263, 43);
 			admin.add(button);
+			
+			Button close = new Button("close");
+			close.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			close.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+			close.setBounds(605, 11, 85, 24);
+			contentPane.add(close);
 
 	}
 }

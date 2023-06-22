@@ -6,98 +6,82 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/barcodes-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/mysqlConnector/mysql-connector-j-8.0.33.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/commons-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/barcodes-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/font-asian-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/commons-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/forms-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/font-asian-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/hyph-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/forms-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/io-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/hyph-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/kernel-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/io-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/layout-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/kernel-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/pdfa-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/layout-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/pdftest-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/pdfa-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/sign-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/pdftest-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/slf4j-api-1.7.2.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/sign-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/slf4j-jdk14-1.7.2.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/slf4j-api-1.7.2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/styled-xml-parser-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/slf4j-jdk14-1.7.2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Downloads/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM-20230620T093504Z-001/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/svg-7.2.4.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/styled-xml-parser-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/barcodes-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/commons-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/font-asian-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/forms-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/hyph-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/io-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/kernel-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/layout-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/pdfa-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/pdftest-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/sign-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/slf4j-jdk14-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/styled-xml-parser-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/svg-7.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lisboa Family/OneDrive/Desktop/Java Projects/POS-java/SLAENALYN KWEENTOLOME - INF212 PAYROLL SYSTEM/mysql-connector-j-8.0.33.jar">
+	<classpathentry kind="lib" path="D:/Art Lisboa files/Java Projects/POS-java/Libraries Needed/iTextsharp/svg-7.2.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

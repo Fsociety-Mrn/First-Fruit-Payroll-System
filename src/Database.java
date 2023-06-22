@@ -21,11 +21,8 @@ public class Database {
     private String username = "root";
     private String password = "";
     
+
     public void createDatabase() {
-
-
-        // Database and table names
-        String databaseName = "your_database";  // Replace with the name of the database you want to create
 
         try {
             // Register the MySQL JDBC driver
@@ -37,34 +34,26 @@ public class Database {
             // Create a statement object
             Statement statement = connection.createStatement();
 
-            // Check if the database exists
-            String checkDatabaseQuery = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '" + databaseName + "'";
-            boolean databaseExists = statement.executeQuery(checkDatabaseQuery).next();
-
-            if (!databaseExists) {
-                // Create the database
-                String createDatabaseQuery = "CREATE DATABASE " + dbName;
-                statement.executeUpdate(createDatabaseQuery);
-                System.out.println("Database created successfully.");
-            } else {
-                System.out.println("Database already exists.");
-            }
-
-            // Close the statement and connection
+            // create database 
+            String createDatabaseQuery = "CREATE DATABASE " + dbName;
+            statement.executeUpdate(createDatabaseQuery);
+            
+            System.out.println("Database created successfully.");
+            
             statement.close();
             connection.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            
+        } catch (Exception e) {
+        	
+//           System.out.println(e.toString());
+           System.out.println("Database exist");
+        } 
     }
 
+    
 	
 	// connection query
-    public Statement getConnected(){
-        
-
+    private Statement getConnected(){
         
         try{
             Class.forName(driver);
@@ -81,4 +70,145 @@ public class Database {
         }
         
     }
+    
+//    create Login table
+    public void createLoginTable() throws SQLException {
+        try {
+
+            // Create the login table
+            String createTableQuery = "CREATE TABLE `login` (`ID` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(5000) NOT NULL, `Username` VARCHAR(5000) NOT NULL, `Password` VARCHAR(5000) NOT NULL, PRIMARY KEY (`ID`)) ENGINE = InnoDB";
+            getConnected().executeUpdate(createTableQuery);
+            System.out.println("Login table created successfully.");
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+            System.out.println("Table exist");
+        } 
+    }
+    
+//  create admin table
+    public void createAdminTable() throws SQLException {
+      try {
+
+          // Create the login table
+          String createTableQuery = "CREATE TABLE `admin` (`ID` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(5000) NOT NULL, `Username` VARCHAR(5000) NOT NULL, `Password` VARCHAR(5000) NOT NULL, PRIMARY KEY (`ID`)) ENGINE = InnoDB";
+          getConnected().executeUpdate(createTableQuery);
+          System.out.println("admin table created successfully.");
+
+          // Close the statement and connection
+          state.close();
+          conn.close();
+          
+      	} catch (Exception e) {
+          // Close the statement and connection
+          state.close();
+          conn.close();
+          
+          System.out.println("admin table exist");
+      	} 
+    }
+    
+//  create admin table
+    public void createEmployeeTable() throws SQLException {
+      try {
+
+          // Create the login table
+          String createTableQuery = "CREATE TABLE `employee` (`ID` INT NOT NULL AUTO_INCREMENT, `Name` VARCHAR(5000) NOT NULL, `Username` VARCHAR(5000) NOT NULL, `Password` VARCHAR(5000) NOT NULL, PRIMARY KEY (`ID`)) ENGINE = InnoDB";
+          getConnected().executeUpdate(createTableQuery);
+          System.out.println("employee table created successfully.");
+
+          // Close the statement and connection
+          state.close();
+          conn.close();
+          
+      	} catch (Exception e) {
+          // Close the statement and connection
+          state.close();
+          conn.close();
+          
+          System.out.println("employee table exist");
+      	} 
+    }
+    
+//  insert admin
+    public void insertDeDataIntoAdminTable() throws SQLException {
+        try {
+
+
+            // Insert data into the login table
+            String insertDataQuery = "INSERT INTO `admin` (`ID`, `Name`, `Username`, `Password`) VALUES ('1', 'ADMIN', 'admin', 'admin123')";
+            getConnected().executeUpdate(insertDataQuery);
+            System.out.println("Data inserted into the login table successfully.");
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+            System.out.println("Default Data exist");
+        } 
+    }
+    
+//  insert employee
+    public void insertDeDataIntoEmployeeTable() throws SQLException {
+        try {
+
+
+            // Insert data into the login table
+            String insertDataQuery = "INSERT INTO `employee` (`ID`, `Name`, `Username`, `Password`) VALUES ('1', 'EMPLOYEE', 'employee', 'employee123')";
+            getConnected().executeUpdate(insertDataQuery);
+            System.out.println("Data inserted into the login table successfully.");
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+            System.out.println("Default Data exist");
+        } 
+    }  
+    
+    
+//    Login Admin
+    public boolean loginAdmin(String username,String password){
+        try{
+            String query = "SELECT `ID` FROM " + 
+                    "`admin`" + " WHERE username='"+ username + "' AND password='" + password + "'";
+            ResultSet result =  getConnected().executeQuery(query);
+            int ID = 0;
+            while(result.next()){
+                ID = result.getInt("ID");
+            }
+            if(ID != 0){
+                System.out.println("Login Success");
+                conn.close();
+                return true;
+            }else{
+                System.out.println("Login failed");
+                conn.close();
+                return false;
+            }
+            
+            
+        }catch(Exception e){
+            System.out.println(e);
+            return false;
+        } 
+    }
+    
 }
