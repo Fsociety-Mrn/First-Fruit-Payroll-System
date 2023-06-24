@@ -211,4 +211,34 @@ public class Database {
         } 
     }
     
+    
+    // SHOW ALL ROWS IN Employee Table
+    public void showRows(JTable table){
+            try{
+            	
+
+            DefaultTableModel tblmodel = (DefaultTableModel)table.getModel();
+            tblmodel.setRowCount(0);
+            
+            String query = "SELECT * FROM `employee`";
+            ResultSet result = getConnected().executeQuery(query);
+            
+            while(result.next()){
+                String data[] = {result.getString("Name")};
+                tblmodel.addRow(data);
+                
+                
+            	
+            	System.out.println(data);
+            }            
+            
+            conn.close();      
+        }catch(Exception e){
+            System.out.println(e);
+ 
+        } 
+    }
+    
+    
+    
 }

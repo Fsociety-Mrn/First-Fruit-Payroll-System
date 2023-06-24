@@ -7,6 +7,8 @@ public class App {
 		System.out.println("App is Running....");
 		Database db = new Database();
 		
+//		db.showRows();
+		
 		try {
 			
 //			Create Database and create admin & employee table and has a default data

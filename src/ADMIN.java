@@ -20,9 +20,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 
 public class ADMIN extends JFrame {
+	
+	private Database db = new Database();
 
 	private JPanel contentPane;
-	private JTable table;
+	private JTable employeeListTable;
 
 	/**
 	 * Launch the application.
@@ -122,6 +124,11 @@ public class ADMIN extends JFrame {
 				employeListButton.setBorder(new LineBorder(new Color(0, 0, 0)));
 				employeeAttendanceButton.setBorder(null);
 				addEmployeeButton.setBorder(null);
+				
+//				employeeListTable
+				db.showRows(employeeListTable);
+				
+				
 			}
 			
 			@Override
@@ -203,7 +210,13 @@ public class ADMIN extends JFrame {
 				brandTitle.setBounds(533, 11, 222, 108);
 				contentPane.add(brandTitle);
 				brandTitle.setPreferredSize(new Dimension(230, 130)); // Set a preferred size for the label
-				ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+				
+//				PC ko
+//				ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+				
+//				Laptop
+				ImageIcon icon = new ImageIcon("C:\\Users\\Lisboa Family\\OneDrive\\Desktop\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+
 				Image img = icon.getImage();
 				Image imgScale = img.getScaledInstance(brandTitle.getPreferredSize().width, brandTitle.getPreferredSize().height, Image.SCALE_SMOOTH);
 				
@@ -224,10 +237,10 @@ public class ADMIN extends JFrame {
 						contentPane.add(EmployeeList);
 						EmployeeList.setLayout(null);
 						
-						table = new JTable();
-						table.setBackground(new Color(225, 244, 243));
-						table.setBounds(10, 23, 744, 382);
-						EmployeeList.add(table);
+						employeeListTable = new JTable();
+						employeeListTable.setBackground(new Color(225, 244, 243));
+						employeeListTable.setBounds(10, 23, 744, 382);
+						EmployeeList.add(employeeListTable);
 						
 						JPanel printtmployeeButton = new JPanel();
 						printtmployeeButton.setLayout(null);

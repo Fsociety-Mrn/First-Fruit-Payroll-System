@@ -95,12 +95,18 @@ public class Login extends JFrame {
 
 			// Create a JPanel to hold the content
 			JPanel contentPane = new JPanel();
+			contentPane.setBackground(Color.WHITE);
 			contentPane.setBorder(new LineBorder(Color.BLACK, 3, true));
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 			
 			JLabel brandTitle = new JLabel();
-			ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+			
+//			PC ko
+//			ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+			
+//			Laptop
+			ImageIcon icon = new ImageIcon("C:\\Users\\Lisboa Family\\OneDrive\\Desktop\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
 
 			brandTitle.setPreferredSize(new Dimension(300, 130)); // Set a preferred size for the label
 
