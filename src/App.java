@@ -19,9 +19,9 @@ public class App {
 		
 			db.createEmployeeTable();
 			db.insertDeDataIntoEmployeeTable();
-		
+//			db.createDatabaseEmployee("5");
 			
-			System.out.print(db.loginEmployee("employee", "employee123"));
+//			System.out.print(db.loginEmployee("employee", "employee123"));
 			
 
 		} catch (SQLException e) {

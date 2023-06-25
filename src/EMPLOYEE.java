@@ -69,6 +69,9 @@ public class EMPLOYEE extends JFrame {
 		
 		Database db = new Database();
 		
+		System.out.println(ID);
+		db.createDatabaseEmployee(String.valueOf(ID));
+		
 		 // Create a Calendar instance
         Calendar calendar = Calendar.getInstance();
         
@@ -400,33 +403,61 @@ public class EMPLOYEE extends JFrame {
 				        lblTotalGrossPay_1.setBounds(10, 11, 456, 27);
 				        panel_2.add(lblTotalGrossPay_1);
 				        
-				        JPanel refreshEmployeeList_1_1 = new JPanel();
-				        refreshEmployeeList_1_1.setLayout(null);
-				        refreshEmployeeList_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-				        refreshEmployeeList_1_1.setBackground(Color.WHITE);
-				        refreshEmployeeList_1_1.setBounds(257, 39, 222, 42);
-				        TimeInOut.add(refreshEmployeeList_1_1);
+				        JPanel timeIn = new JPanel();
+				        JPanel timeOut = new JPanel();
 				        
-				        JLabel lblCancel = new JLabel("Time In");
-				        lblCancel.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblCancel.setForeground(Color.BLACK);
-				        lblCancel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        lblCancel.setBackground(Color.WHITE);
-				        lblCancel.setBounds(10, 11, 202, 20);
-				        refreshEmployeeList_1_1.add(lblCancel);
+				        timeIn.setLayout(null);
+				        timeIn.setBorder(new LineBorder(new Color(0, 0, 0)));
+				        timeIn.setBackground(Color.WHITE);
+				        timeIn.setBounds(257, 39, 222, 42);
+				        TimeInOut.add(timeIn);
 				        
-				        JPanel refreshEmployeeList_1 = new JPanel();
-				        refreshEmployeeList_1.setLayout(null);
-				        refreshEmployeeList_1.setBackground(Color.BLACK);
-				        refreshEmployeeList_1.setBounds(257, 39, 222, 42);
-				        TimeInOut.add(refreshEmployeeList_1);
+				        JLabel timeOutButton = new JLabel("Time Out");
+				        JLabel timeInButton = new JLabel("Time In");
 				        
-				        JLabel lblTimeOut = new JLabel("Time Out");
-				        lblTimeOut.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblTimeOut.setForeground(Color.WHITE);
-				        lblTimeOut.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        lblTimeOut.setBounds(10, 11, 202, 20);
-				        refreshEmployeeList_1.add(lblTimeOut);
+				        timeInButton.addMouseListener(new MouseAdapter() {
+				        	@Override
+				        	public void mouseEntered(MouseEvent e) {
+				        		timeInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				        	}
+				        	@Override
+				        	public void mouseClicked(MouseEvent e) {
+				        		timeIn.setVisible(false);
+				        		timeOut.setVisible(true);
+				        	}
+				        });
+				        timeInButton.setHorizontalAlignment(SwingConstants.CENTER);
+				        timeInButton.setForeground(Color.BLACK);
+				        timeInButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+				        timeInButton.setBackground(Color.WHITE);
+				        timeInButton.setBounds(10, 11, 202, 20);
+				        timeIn.add(timeInButton);
+				        
+			
+				        
+				        timeOut.setLayout(null);
+				        timeOut.setBackground(Color.BLACK);
+				        timeOut.setBounds(257, 39, 222, 42);
+				        TimeInOut.add(timeOut);
+				        
+				        
+				        timeOutButton.addMouseListener(new MouseAdapter() {
+				        	@Override
+				        	public void mouseEntered(MouseEvent e) {
+				        		timeOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				        	}
+				        	
+				        	@Override
+				        	public void mouseClicked(MouseEvent e) {
+				        		timeIn.setVisible(true);
+				        		timeOut.setVisible(false);
+				        	}
+				        });
+				        timeOutButton.setHorizontalAlignment(SwingConstants.CENTER);
+				        timeOutButton.setForeground(Color.WHITE);
+				        timeOutButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+				        timeOutButton.setBounds(10, 11, 202, 20);
+				        timeOut.add(timeOutButton);
 				        
 				        JLabel lblGoodDay = new JLabel("Good day!");
 				        lblGoodDay.setFont(new Font("Segoe UI", Font.PLAIN, 20));

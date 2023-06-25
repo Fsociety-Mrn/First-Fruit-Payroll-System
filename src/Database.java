@@ -50,7 +50,35 @@ public class Database {
         } 
     }
 
-    
+//    create database salary history
+    public void createDatabaseEmployee(String salary) {
+
+        try {
+            // Register the MySQL JDBC driver
+            Class.forName(driver);
+
+            // Create a connection to the database server
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            // Create a statement object
+            Statement statement = connection.createStatement();
+
+            // create database 
+            String createDatabaseQuery = "CREATE DATABASE `" + String.valueOf(salary) + "`;";
+            statement.executeUpdate(createDatabaseQuery);
+            
+            System.out.println("Database created successfully.");
+            
+            statement.close();
+            connection.close();
+            
+        } catch (Exception e) {
+        	
+           System.out.println(e.toString());
+           System.out.println("Database exist");
+        } 
+    }
+
 	
 	// connection query
     private Statement getConnected(){

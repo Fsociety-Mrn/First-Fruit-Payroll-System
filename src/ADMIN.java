@@ -336,7 +336,7 @@ public class ADMIN extends JFrame {
 				        	public void mouseClicked(MouseEvent e) {
 				        		String username = NameTextfield.getText().replace(" ", "");
 				        		String Name = NameTextfield.getText();
-				        		String password = "employe123";
+				        		String password = "employee123";
 				        		String salary = rate.getText();
 				        		String position = (String) comboBox.getSelectedItem();
 				        	
