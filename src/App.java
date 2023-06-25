@@ -16,19 +16,21 @@ public class App {
 			
 			db.createAdminTable();
 			db.insertDeDataIntoAdminTable();
-//			
+		
 			db.createEmployeeTable();
 			db.insertDeDataIntoEmployeeTable();
-//			db.loginAdmin("admin", "admin123");
+		
 			
+			System.out.print(db.loginEmployee("employee", "employee123"));
 			
-//			db.insertDeDataIntoLoginTable();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		new Login().setVisible(true);
+//		new EMPLOYEE().setVisible(true);
 
 	}
 

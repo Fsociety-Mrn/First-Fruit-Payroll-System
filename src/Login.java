@@ -103,10 +103,10 @@ public class Login extends JFrame {
 			JLabel brandTitle = new JLabel();
 			
 //			PC ko
-//			ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+			ImageIcon icon = new ImageIcon("D:\\Art Lisboa files\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
 			
 //			Laptop
-			ImageIcon icon = new ImageIcon("C:\\Users\\Lisboa Family\\OneDrive\\Desktop\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
+//			ImageIcon icon = new ImageIcon("C:\\Users\\Lisboa Family\\OneDrive\\Desktop\\Java Projects\\POS-java\\Images\\IMG_9704.JPG");
 
 			brandTitle.setPreferredSize(new Dimension(300, 130)); // Set a preferred size for the label
 
@@ -178,6 +178,23 @@ public class Login extends JFrame {
 			employee.add(employeePasswors);
 			
 			Button employeeLogin = new Button("Login as Employee");
+			employeeLogin.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					String username = employeeUsername.getText();
+					String password = employeePasswors.getText();
+					
+					
+					int ID = new Database().loginEmployee(username, password);
+					
+					if (ID != 0) {
+						new EMPLOYEE(ID).setVisible(true);
+						dispose();
+					}
+		
+					
+				}
+			});
 			employeeLogin.setBounds(229, 171, 263, 43);
 			employee.add(employeeLogin);
 			
