@@ -11,17 +11,22 @@ public class App {
 		
 		try {
 			
-//			Create Database and create admin & employee table and has a default data
+//			Create Database payroll and create admin & employee table and has a default data
 			db.createDatabase();
 			
+			
+//			create a admin table and deafualtt admin user and pass
 			db.createAdminTable();
 			db.insertDeDataIntoAdminTable();
 		
+//			create employee table with default employee user and pass
 			db.createEmployeeTable();
 			db.insertDeDataIntoEmployeeTable();
-//			db.createDatabaseEmployee("5");
 			
-//			System.out.print(db.loginEmployee("employee", "employee123"));
+//			create attendance table 
+			db.createAttendance();
+			
+//			db.addAttendance(0, "hello", "friend", "hello", "friend", 0, 0);
 			
 
 		} catch (SQLException e) {

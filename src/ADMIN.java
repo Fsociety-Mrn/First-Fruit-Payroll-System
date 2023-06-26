@@ -50,6 +50,7 @@ public class ADMIN extends JFrame {
 	private JTable employeeListTable;
 	private JTextField NameTextfield;
 	private JTextField rate;
+	private JTable employeeAttendance;
 
 	/**
 	 * Launch the application.
@@ -73,9 +74,11 @@ public class ADMIN extends JFrame {
 	 * Create the frame.
 	 */
 	public ADMIN() {
-		
-        JComboBox comboBox = new JComboBox();
         
+        JPanel EmployeeList = new JPanel();
+        JPanel EmployeeAttendance = new JPanel();
+        JPanel AddEmployee = new JPanel();
+		
 		 // Create a Calendar instance
         Calendar calendar = Calendar.getInstance();
         
@@ -121,10 +124,6 @@ public class ADMIN extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-        JPanel EmployeeList = new JPanel();
-        JPanel AddEmployee = new JPanel();
 		
 //        JPanel EmployeeList = new JPanel();
 //        JPanel AddEmployee = new JPanel();
@@ -186,6 +185,7 @@ public class ADMIN extends JFrame {
 				
 			    EmployeeList.setVisible(true);
 		        AddEmployee.setVisible(false);
+		        EmployeeAttendance.setVisible(false);
 				
 				
 			}
@@ -218,6 +218,7 @@ public class ADMIN extends JFrame {
 				
 			    EmployeeList.setVisible(false);
 		        AddEmployee.setVisible(false);
+		        EmployeeAttendance.setVisible(true);
 			}
 			
 			@Override
@@ -247,7 +248,7 @@ public class ADMIN extends JFrame {
 				
 		        EmployeeList.setVisible(false);
 		        AddEmployee.setVisible(true);
-//				EmployeeAttendance.setVisible(false);
+				EmployeeAttendance.setVisible(false);
 				
 			}
 			
@@ -301,109 +302,30 @@ public class ADMIN extends JFrame {
 				        // Set the cell renderer to center align the content
 				        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 				        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		
+//						EmployeeAttendance.setVisible(false);
 				        
-
-				        AddEmployee.setBackground(Color.WHITE);
-				        AddEmployee.setBounds(256, 113, 764, 476);
-				        contentPane.add(AddEmployee);
-				        AddEmployee.setLayout(null);
-				        
-				        NameTextfield = new JTextField();
-				        NameTextfield.setHorizontalAlignment(SwingConstants.CENTER);
-				        NameTextfield.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        NameTextfield.setColumns(10);
-				        NameTextfield.setBounds(10, 113, 744, 53);
-				        AddEmployee.add(NameTextfield);
-				        
-				        JLabel Name = new JLabel("Name");
-				        Name.setHorizontalAlignment(SwingConstants.CENTER);
-				        Name.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        Name.setBounds(10, 74, 744, 40);
-				        AddEmployee.add(Name);
-				        
-
-				        
-				        JPanel refreshEmployeeList_1 = new JPanel();
-				        refreshEmployeeList_1.setLayout(null);
-				        refreshEmployeeList_1.setBackground(Color.BLACK);
-				        refreshEmployeeList_1.setBounds(164, 402, 222, 42);
-				        AddEmployee.add(refreshEmployeeList_1);
-				        
-				        JLabel lblCreateEmployee = new JLabel("Create Employee");
-				        lblCreateEmployee.addMouseListener(new MouseAdapter() {
-				        	@Override
-				        	public void mouseClicked(MouseEvent e) {
-				        		String username = NameTextfield.getText().replace(" ", "");
-				        		String Name = NameTextfield.getText();
-				        		String password = "employee123";
-				        		String salary = rate.getText();
-				        		String position = (String) comboBox.getSelectedItem();
-				        	
-				   
-				        		try {
-				        			db.addEmployee(Name, username, password, salary, position);
-									
-		
-								   String message = "Your Username is: " + username + "\nYour default Password is: " + password +"\nPlease change password";
-
-								   JOptionPane.showMessageDialog(null, message, "Create Employee Success!", JOptionPane.INFORMATION_MESSAGE);
-								   
-								   comboBox.setSelectedItem("please select position");
-								   NameTextfield.setText("");
-								        
-								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-									System.out.println(e1.toString());
-									JOptionPane.showMessageDialog(null, "Unable to create employee", "Error!", JOptionPane.INFORMATION_MESSAGE);
-								}
-				        	}
+				        // Create a timer to update the time every second
+				        Timer timer = new Timer(1000, new ActionListener() {
+				            @Override
+				            public void actionPerformed(ActionEvent e) {
+				                // Get the current time
+				                Date currentTime = new Date();
+				                
+				                // Format the time
+				                SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+				                String formattedTime = timeFormat.format(currentTime);
+				                
+				                // Update the label with the new time
+				                TIME.setText(formattedTime);
+				            }
 				        });
-				        lblCreateEmployee.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblCreateEmployee.setForeground(Color.WHITE);
-				        lblCreateEmployee.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        lblCreateEmployee.setBounds(10, 11, 202, 20);
-				        
-				        refreshEmployeeList_1.add(lblCreateEmployee);
-				        
-				        JPanel refreshEmployeeList_1_1 = new JPanel();
-				        refreshEmployeeList_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-				        refreshEmployeeList_1_1.setLayout(null);
-				        refreshEmployeeList_1_1.setBackground(Color.WHITE);
-				        refreshEmployeeList_1_1.setBounds(396, 402, 222, 42);
-				        AddEmployee.add(refreshEmployeeList_1_1);
-				        
-				        JLabel lblCancel = new JLabel("Cancel");
-				        lblCancel.setBackground(Color.WHITE);
-				        lblCancel.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblCancel.setForeground(Color.BLACK);
-				        lblCancel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        lblCancel.setBounds(10, 11, 202, 20);
-				        refreshEmployeeList_1_1.add(lblCancel);
-				        
-				        JLabel lblPosition = new JLabel("Position");
-				        lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblPosition.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        lblPosition.setBounds(10, 166, 744, 53);
-				        AddEmployee.add(lblPosition);
-				        
-				        rate = new JTextField();
-				        rate.setEditable(false);
-				        rate.setHorizontalAlignment(SwingConstants.CENTER);
-				        rate.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        rate.setColumns(10);
-				        rate.setBounds(10, 320, 744, 53);
-				        AddEmployee.add(rate);
-				        
-				        JLabel lblRate = new JLabel("Rate");
-				        lblRate.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblRate.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        lblRate.setBounds(20, 269, 744, 40);
-				        AddEmployee.add(lblRate);
-				        
+				        timer.start();
+        		        
+        		        
+
+        
 	
-				        
+        
 
 //		set defaul data 
         
@@ -450,7 +372,7 @@ public class ADMIN extends JFrame {
         		{"0", "Please click refresh"},
         	},
         	new String[] {
-        		"ID", "Name"
+        		"employee ID", "Name"
         	}
 						));
 						
@@ -482,50 +404,148 @@ public class ADMIN extends JFrame {
 				        refreshListButton.setBounds(10, 11, 202, 20);
 				        refreshEmployeeList.add(refreshListButton);
 				        
-				        JScrollPane scrollPane = new JScrollPane();
-				        scrollPane.setBounds(0, 0, 2, 2);
-				        EmployeeList.add(scrollPane);
+	
+				        EmployeeAttendance.setBounds(256, 113, 764, 476);
+				        contentPane.add(EmployeeAttendance);
+				        EmployeeAttendance.setLayout(null);
 				        
-				        EmployeeList.setVisible(true);
-				        AddEmployee.setVisible(false);
-//						EmployeeAttendance.setVisible(false);
+				        JScrollPane scrollPane_1 = new JScrollPane();
+				        scrollPane_1.setBounds(10, 11, 744, 454);
+				        EmployeeAttendance.add(scrollPane_1);
 				        
-				        // Create a timer to update the time every second
-				        Timer timer = new Timer(1000, new ActionListener() {
-				            @Override
-				            public void actionPerformed(ActionEvent e) {
-				                // Get the current time
-				                Date currentTime = new Date();
-				                
-				                // Format the time
-				                SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
-				                String formattedTime = timeFormat.format(currentTime);
-				                
-				                // Update the label with the new time
-				                TIME.setText(formattedTime);
-				            }
-				        });
-				        timer.start();
+				        employeeAttendance = new JTable();
+				        employeeAttendance.setModel(new DefaultTableModel(
+				        	new Object[][] {
+				        	},
+				        	new String[] {
+				        		"employee ID", "Name", "Time In", "Time Out", "work hours", "tardiness"
+				        	}
+				        ));
+				        scrollPane_1.setViewportView(employeeAttendance);
 				        
-				        
+        JComboBox comboBox = new JComboBox();
+
+        
+        		        
+
+        		        AddEmployee.setBackground(Color.WHITE);
+        		        AddEmployee.setBounds(256, 113, 764, 476);
+        		        contentPane.add(AddEmployee);
+        		        AddEmployee.setLayout(null);
+        		        
+        		        NameTextfield = new JTextField();
+        		        NameTextfield.setHorizontalAlignment(SwingConstants.CENTER);
+        		        NameTextfield.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        		        NameTextfield.setColumns(10);
+        		        NameTextfield.setBounds(10, 113, 744, 53);
+        		        AddEmployee.add(NameTextfield);
+        		        
+        		        JLabel Name_1 = new JLabel("Name");
+        		        Name_1.setHorizontalAlignment(SwingConstants.CENTER);
+        		        Name_1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        		        Name_1.setBounds(10, 74, 744, 40);
+        		        AddEmployee.add(Name_1);
+        		        
+
+        		        
+        		        JPanel refreshEmployeeList_1 = new JPanel();
+        		        refreshEmployeeList_1.setLayout(null);
+        		        refreshEmployeeList_1.setBackground(Color.BLACK);
+        		        refreshEmployeeList_1.setBounds(164, 402, 222, 42);
+        		        AddEmployee.add(refreshEmployeeList_1);
+        		        
+        		        JLabel lblCreateEmployee = new JLabel("Create Employee");
+        		        lblCreateEmployee.addMouseListener(new MouseAdapter() {
+        		        	@Override
+        		        	public void mouseClicked(MouseEvent e) {
+        		        		String username = NameTextfield.getText().replace(" ", "");
+        		        		String Name = NameTextfield.getText();
+        		        		String password = "employee123";
+        		        		String salary = rate.getText();
+        		        		String position = (String) comboBox.getSelectedItem();
+        		        	
+				   
+        		        		try {
+        		        			db.addEmployee(Name, username, password, salary, position);
+									
+		
+								   String message = "Your Username is: " + username + "\nYour default Password is: " + password +"\nPlease change password";
+
+								   JOptionPane.showMessageDialog(null, message, "Create Employee Success!", JOptionPane.INFORMATION_MESSAGE);
+								   
+								   comboBox.setSelectedItem("please select position");
+								   NameTextfield.setText("");
+								        
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+									System.out.println(e1.toString());
+									JOptionPane.showMessageDialog(null, "Unable to create employee", "Error!", JOptionPane.INFORMATION_MESSAGE);
+								}
+        		        	}
+        		        });
+        		        lblCreateEmployee.setHorizontalAlignment(SwingConstants.CENTER);
+        		        lblCreateEmployee.setForeground(Color.WHITE);
+        		        lblCreateEmployee.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        		        lblCreateEmployee.setBounds(10, 11, 202, 20);
+        		        
+        		        refreshEmployeeList_1.add(lblCreateEmployee);
+        		        
+        		        JPanel refreshEmployeeList_1_1 = new JPanel();
+        		        refreshEmployeeList_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+        		        refreshEmployeeList_1_1.setLayout(null);
+        		        refreshEmployeeList_1_1.setBackground(Color.WHITE);
+        		        refreshEmployeeList_1_1.setBounds(396, 402, 222, 42);
+        		        AddEmployee.add(refreshEmployeeList_1_1);
+        		        
+        		        JLabel lblCancel = new JLabel("Cancel");
+        		        lblCancel.setBackground(Color.WHITE);
+        		        lblCancel.setHorizontalAlignment(SwingConstants.CENTER);
+        		        lblCancel.setForeground(Color.BLACK);
+        		        lblCancel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        		        lblCancel.setBounds(10, 11, 202, 20);
+        		        refreshEmployeeList_1_1.add(lblCancel);
+        		        
+        		        JLabel lblPosition = new JLabel("Position");
+        		        lblPosition.setHorizontalAlignment(SwingConstants.CENTER);
+        		        lblPosition.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        		        lblPosition.setBounds(10, 166, 744, 53);
+        		        AddEmployee.add(lblPosition);
+        		        
+        		        rate = new JTextField();
+        		        rate.setEditable(false);
+        		        rate.setHorizontalAlignment(SwingConstants.CENTER);
+        		        rate.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        		        rate.setColumns(10);
+        		        rate.setBounds(10, 320, 744, 53);
+        		        AddEmployee.add(rate);
+        		        
+        		        JLabel lblRate = new JLabel("Rate");
+        		        lblRate.setHorizontalAlignment(SwingConstants.CENTER);
+        		        lblRate.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        		        lblRate.setBounds(20, 269, 744, 40);
+        		        AddEmployee.add(lblRate);
+        		        AddEmployee.setVisible(false);
+        		        
+        		        
 //				        JComboBox comboBox = new JComboBox();
-				        comboBox.addActionListener(new ActionListener() {
-				        	public void actionPerformed(ActionEvent e) {
-				        		System.out.println(comboBox.getSelectedItem());
-				        		
+        		        comboBox.addActionListener(new ActionListener() {
+        		        	public void actionPerformed(ActionEvent e) {
+        		        		System.out.println(comboBox.getSelectedItem());
+        		        		
 //				        		Officer in Charge (OIC)
 //				        		Sales staff
 //				        		Technician
-				        		
-				        		switch(String.valueOf(comboBox.getSelectedItem())) {
+        		        		
+        		        		switch(String.valueOf(comboBox.getSelectedItem())) {
 				       				case "Supervisor":
 				       					rate.setText("600");       					
-				        			break;
-				        			
-				        			case "Officer in Charge (OIC)":
-				        				rate.setText("450");
-				        			break;
-				        				
+        		        			break;
+        		        			
+        		        			case "Officer in Charge (OIC)":
+        		        				rate.setText("450");
+        		        			break;
+        		        				
 				     				case "Sales staff":
 				     					rate.setText("430");
 					        		break;
@@ -533,16 +553,18 @@ public class ADMIN extends JFrame {
 					        		case "Technician":
 					        			rate.setText("440");
 					        		break;
-				        		}
-				        	}
-				        	
-				        });
-				        comboBox.setModel(new DefaultComboBoxModel(new String[] {"please select position", "Supervisor", "Officer in Charge (OIC)", "Sales staff", "Technician"}));
+        		        		}
+        		        	}
+        		        	
+        		        });
+        		        comboBox.setModel(new DefaultComboBoxModel(new String[] {"please select position", "Supervisor", "Officer in Charge (OIC)", "Sales staff", "Technician"}));
+        		        
+        		        comboBox.setBackground(Color.WHITE);
+        		        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        		        comboBox.setBounds(177, 218, 425, 40);
+        		        AddEmployee.add(comboBox);
 				        
-				        comboBox.setBackground(Color.WHITE);
-				        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        comboBox.setBounds(177, 218, 425, 40);
-				        AddEmployee.add(comboBox);
+				        EmployeeList.setVisible(true);
 						
 						
 						

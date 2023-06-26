@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -34,6 +36,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
 
 import javax.swing.Timer;
 
@@ -68,6 +73,8 @@ public class EMPLOYEE extends JFrame {
 	public EMPLOYEE(int ID) {
 		
 		Database db = new Database();
+		
+		JLabel NameLabel = new JLabel(db.getEmployeeName(ID));
 		
 		System.out.println(ID);
 		db.createDatabaseEmployee(String.valueOf(ID));
@@ -336,72 +343,72 @@ public class EMPLOYEE extends JFrame {
 				        lblSss_2_2.setBounds(10, 148, 333, 40);
 				        panel.add(lblSss_2_2);
 				        
-				        JPanel panel_1 = new JPanel();
-				        panel_1.setLayout(null);
-				        panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-				        panel_1.setBounds(10, 92, 353, 246);
-				        TimeInOut.add(panel_1);
+				        JPanel totalGross = new JPanel();
+				        totalGross.setLayout(null);
+				        totalGross.setBorder(new LineBorder(new Color(0, 0, 0)));
+				        totalGross.setBounds(10, 92, 353, 246);
+				        TimeInOut.add(totalGross);
 				        
-				        JLabel lblTotalGrossPay = new JLabel("Total Gross Pay summary");
-				        lblTotalGrossPay.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblTotalGrossPay.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-				        lblTotalGrossPay.setBounds(10, 11, 333, 27);
-				        panel_1.add(lblTotalGrossPay);
+				        JLabel TotalGrossPay = new JLabel("Total Gross Pay summary");
+				        TotalGrossPay.setHorizontalAlignment(SwingConstants.CENTER);
+				        TotalGrossPay.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+				        TotalGrossPay.setBounds(10, 11, 333, 27);
+				        totalGross.add(TotalGrossPay);
 				        
-				        JLabel lblDailyRate = new JLabel("Total Regular work days: 12");
-				        lblDailyRate.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        lblDailyRate.setBounds(53, 49, 290, 40);
-				        panel_1.add(lblDailyRate);
+				        JLabel workDaysLabel = new JLabel("Total Regular work days: 12");
+				        workDaysLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        workDaysLabel.setBounds(53, 49, 290, 40);
+				        totalGross.add(workDaysLabel);
 				        
-				        JLabel lblSss_1_1 = new JLabel("Regular Work hours");
-				        lblSss_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        lblSss_1_1.setBounds(53, 71, 290, 40);
-				        panel_1.add(lblSss_1_1);
+				        JLabel workHoursLabel = new JLabel("Regular Work hours: 0");
+				        workHoursLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        workHoursLabel.setBounds(53, 71, 290, 40);
+				        totalGross.add(workHoursLabel);
 				        
-				        JLabel lblSss_2_1 = new JLabel("LESS: Absent days: 0");
-				        lblSss_2_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        lblSss_2_1.setBounds(53, 97, 290, 40);
-				        panel_1.add(lblSss_2_1);
+				        JLabel absentLabel = new JLabel("LESS: Absent days: 0");
+				        absentLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        absentLabel.setBounds(53, 97, 290, 40);
+				        totalGross.add(absentLabel);
 				        
-				        JLabel lblSss_2_2_1 = new JLabel("Total Gross pay: 123");
-				        lblSss_2_2_1.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblSss_2_2_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        lblSss_2_2_1.setBounds(10, 199, 333, 40);
-				        panel_1.add(lblSss_2_2_1);
+				        JLabel totalGrossLabel = new JLabel("Total Gross pay: 123");
+				        totalGrossLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				        totalGrossLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        totalGrossLabel.setBounds(10, 199, 333, 40);
+				        totalGross.add(totalGrossLabel);
 				        
-				        JLabel lblDailyRate_1 = new JLabel("LESS: Tardiness Hours: 2");
-				        lblDailyRate_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        lblDailyRate_1.setBounds(53, 122, 290, 40);
-				        panel_1.add(lblDailyRate_1);
+				        JLabel tardinessLabel = new JLabel("LESS: Tardiness Hours: 2");
+				        tardinessLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        tardinessLabel.setBounds(53, 122, 290, 40);
+				        totalGross.add(tardinessLabel);
 				        
-				        JLabel lblDailyRate_1_1 = new JLabel("Daily Rate: 230");
-				        lblDailyRate_1_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        lblDailyRate_1_1.setBounds(53, 148, 290, 40);
-				        panel_1.add(lblDailyRate_1_1);
+				        JLabel rateLabel = new JLabel("Daily Rate: 230");
+				        rateLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        rateLabel.setBounds(53, 148, 290, 40);
+				        totalGross.add(rateLabel);
 				        
-				        JPanel panel_2 = new JPanel();
-				        panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-				        panel_2.setBounds(156, 349, 476, 127);
-				        TimeInOut.add(panel_2);
-				        panel_2.setLayout(null);
+				        JPanel netIncome = new JPanel();
+				        netIncome.setBorder(new LineBorder(new Color(0, 0, 0)));
+				        netIncome.setBounds(156, 349, 476, 127);
+				        TimeInOut.add(netIncome);
+				        netIncome.setLayout(null);
 				        
-				        JLabel lblNetIncome = new JLabel("Net Income: 4000");
-				        lblNetIncome.setBounds(10, 87, 456, 27);
-				        panel_2.add(lblNetIncome);
-				        lblNetIncome.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblNetIncome.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				        JLabel netIncomeLabel = new JLabel("Net Income: 4000");
+				        netIncomeLabel.setBounds(10, 87, 456, 27);
+				        netIncome.add(netIncomeLabel);
+				        netIncomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				        netIncomeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 				        
-				        JLabel lblLessTotalDeductions = new JLabel("LESS: Total Deductions: 123");
-				        lblLessTotalDeductions.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblLessTotalDeductions.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        lblLessTotalDeductions.setBounds(10, 49, 456, 27);
-				        panel_2.add(lblLessTotalDeductions);
+				        JLabel deductionLabel = new JLabel("LESS: Total Deductions: 123");
+				        deductionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				        deductionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				        deductionLabel.setBounds(10, 49, 456, 27);
+				        netIncome.add(deductionLabel);
 				        
-				        JLabel lblTotalGrossPay_1 = new JLabel("Total Gross pay: 23123");
-				        lblTotalGrossPay_1.setHorizontalAlignment(SwingConstants.CENTER);
-				        lblTotalGrossPay_1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        lblTotalGrossPay_1.setBounds(10, 11, 456, 27);
-				        panel_2.add(lblTotalGrossPay_1);
+				        JLabel grossPayResult = new JLabel("Total Gross pay: 23123");
+				        grossPayResult.setHorizontalAlignment(SwingConstants.CENTER);
+				        grossPayResult.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				        grossPayResult.setBounds(10, 11, 456, 27);
+				        netIncome.add(grossPayResult);
 				        
 				        JPanel timeIn = new JPanel();
 				        JPanel timeOut = new JPanel();
@@ -422,8 +429,64 @@ public class EMPLOYEE extends JFrame {
 				        	}
 				        	@Override
 				        	public void mouseClicked(MouseEvent e) {
+				        		
+				        		
+				        		
 				        		timeIn.setVisible(false);
 				        		timeOut.setVisible(true);
+				        		
+				        		
+				        
+				        	    // Get the current date
+				                Date currentDateNow = calendar.getTime();
+				        	
+				      
+				        		String name = "";
+				        	
+				                
+				                // Format the date
+				                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+				                String formattedDate = dateFormat.format(currentDateNow);
+				                
+				          		String date = formattedDate;
+				          		
+				                // Display the formatted date
+//				                System.out.println("Current Date: " + formattedDate);
+				                
+				                
+//				          		Time In
+				                SimpleDateFormat TimeInFormat = new SimpleDateFormat("hh:mm a");
+				                String timeIn = TimeInFormat.format(calendar.getTime());
+				                String timeOut = "N/A";
+				                
+				                int workHours = 0;
+				                
+				             // Get the current time
+				                LocalTime currentTime = LocalTime.now();
+
+				                // Set the ideal time to 8:00 AM
+				                LocalTime idealTime = LocalTime.of(8, 0, 0);
+
+				                // Calculate the time difference in minutes
+				                long minutesLate = ChronoUnit.MINUTES.between(idealTime, currentTime);
+
+				                // Calculate the time difference in hours
+				                long hoursLate = ChronoUnit.HOURS.between(idealTime, currentTime);
+				             
+			                    double tardiness = (minutesLate / 60.0);
+			                    
+			        			try {
+			        				if (db.timeInCheck(NameLabel.getText(), formattedDate) == false) {
+			        					db.addAttendance(ID, date, NameLabel.getText(), timeIn, timeOut, workHours, tardiness);
+					        		}
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+			                    System.out.println(tardiness);
+
+		
+				        		
 				        	}
 				        });
 				        timeInButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -451,6 +514,12 @@ public class EMPLOYEE extends JFrame {
 				        	public void mouseClicked(MouseEvent e) {
 				        		timeIn.setVisible(true);
 				        		timeOut.setVisible(false);
+				        		
+				        		// Format the date
+				                SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-dd-MM");
+				                String formattedDates = dateFormats.format(currentDate);
+				        		
+				        		db.timeOutCheck(NameLabel.getText(), formattedDates);
 				        	}
 				        });
 				        timeOutButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -464,10 +533,10 @@ public class EMPLOYEE extends JFrame {
 				        lblGoodDay.setBounds(259, 11, 222, 40);
 				        contentPane.add(lblGoodDay);
 				        
-				        JLabel lblArtmillenCLisboa = new JLabel(db.getEmployeeName(ID));
-				        lblArtmillenCLisboa.setFont(new Font("Segoe UI", Font.PLAIN, 30));
-				        lblArtmillenCLisboa.setBounds(268, 48, 395, 47);
-				        contentPane.add(lblArtmillenCLisboa);
+				       
+				        NameLabel.setFont(new Font("Segoe UI", Font.PLAIN, 30));
+				        NameLabel.setBounds(268, 48, 395, 47);
+				        contentPane.add(NameLabel);
 				        
 
 				        
@@ -487,6 +556,19 @@ public class EMPLOYEE extends JFrame {
 				            }
 				        });
 				        timer.start();
+				        
+				        
+		                // Format the date
+		                SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-dd-MM");
+		                String formattedDates = dateFormats.format(currentDate);
+		                
+				        if (db.timeInCheck(NameLabel.getText(), formattedDates)) {
+			        		timeIn.setVisible(false);
+			        		timeOut.setVisible(true);
+				        }else {
+			        		timeIn.setVisible(true);
+			        		timeOut.setVisible(false);
+				        }
 						
 						
 						

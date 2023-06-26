@@ -78,6 +78,7 @@ public class Database {
            System.out.println("Database exist");
         } 
     }
+    
 
 	
 	// connection query
@@ -167,6 +168,31 @@ public class Database {
       	} 
     }
     
+    
+//  create employee Attendance table
+    public void createAttendance() throws SQLException {
+      try {
+
+          // Create the login table
+          String createTableQuery = "CREATE TABLE `attendance` ( `ID` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`ID`),`employID` INT NOT NULL , `date` VARCHAR(500) NOT NULL , `Name` VARCHAR(500) NOT NULL , `TimeIn` VARCHAR(500) NOT NULL , `TimeOut` VARCHAR(500) NOT NULL , `workHours` DOUBLE NOT NULL , `tardiness` DOUBLE NOT NULL) ENGINE = InnoDB;";
+          getConnected().executeUpdate(createTableQuery);
+          System.out.println("attendance table created successfully.");
+
+          // Close the statement and connection
+          state.close();
+          conn.close();
+          
+      	} catch (Exception e) {
+          // Close the statement and connection
+          state.close();
+          conn.close();
+          
+          System.out.println(e.toString());
+          
+//          System.out.println("employee table exist");
+      	} 
+    }
+    
 //  insert admin
     public void insertDeDataIntoAdminTable() throws SQLException {
         try {
@@ -238,6 +264,53 @@ public class Database {
     }  
     
     
+//  add attendance | Time In
+    public void addAttendance(int employID, String date, String Name, String TimeIn, String TimeOut, int workHours, double tard) throws SQLException {
+        try {
+
+
+            // Insert data into the login table
+            String insertDataQuery = "INSERT INTO `attendance` (`employID`, `date`, `Name`, `TimeIn`, `TimeOut`, `workHours`, `tardiness`) VALUES ('"+employID+"', '"+date+"', '"+Name+"', '"+TimeIn+"', '"+TimeOut+"', '"+workHours+"', '"+tard+"')";
+            getConnected().executeUpdate(insertDataQuery);
+            System.out.println("Data inserted into the attendance table successfully.");
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+            System.out.println("Default Data exist");
+        } 
+    } 
+    
+//  add attendance | Time Out
+    public void updateAttendance(int ID, String Date, String TimeOut, double workHours) throws SQLException {
+        try {
+
+
+            // Insert data into the login table
+            String updateDataQuery = "UPDATE `attendance` SET `TimeOut` = '"+TimeOut+"', `workHours` = '"+workHours+"' WHERE `employID` = '"+ID+"' AND `date` = '"+Date+"'";
+            int rows = getConnected().executeUpdate(updateDataQuery);
+            System.out.println("Attendance table successfully." + rows);
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+            System.out.println("Default Data exist");
+        } 
+    } 
+    
+    
 //    Login Admin
     public boolean loginAdmin(String username,String password){
         try{
@@ -292,6 +365,65 @@ public class Database {
           return 0;
       } 
     }
+    
+//  check TimeIn 
+  public boolean timeInCheck(String Name,String Date){
+      try{
+          String query = "SELECT `ID` FROM " + 
+                  "`attendance`" + " WHERE Name='"+ Name + "' AND date='" + Date + "'";
+          ResultSet result =  getConnected().executeQuery(query);
+          int ID = 0;
+          while(result.next()){
+              ID = result.getInt("ID");
+          }
+          if(ID != 0){
+              System.out.println("time in");
+              conn.close();
+              return true;
+          }else{
+              System.out.println("already time in");
+              conn.close();
+              return false;
+          }
+          
+          
+      }catch(Exception e){
+          System.out.println(e);
+          return false;
+      } 
+  }
+  
+//check TimeIn 
+public boolean timeOutCheck(String Name,String Date){
+    try{
+        String query = "SELECT `TimeOut` FROM " + 
+                "`attendance`" + " WHERE Name='"+ Name + "' AND date='" + Date + "'";
+        ResultSet result =  getConnected().executeQuery(query);
+        String timeOut = null;
+        while(result.next()){
+        	timeOut = result.getString("TimeOut");
+        }
+        
+        System.out.println(timeOut);
+        
+        if(timeOut == "N/A"){
+            System.out.println("time out");
+            conn.close();
+            return true;
+        }else{
+            System.out.println("already time out");
+            conn.close();
+            return false;
+        }
+        
+        
+    }catch(Exception e){
+        System.out.println(e);
+        return false;
+    } 
+}
+  
+
     
 //  get employee name
     public String getEmployeeName(int ID){
