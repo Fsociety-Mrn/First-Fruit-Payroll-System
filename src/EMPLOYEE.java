@@ -519,7 +519,27 @@ public class EMPLOYEE extends JFrame {
 				                SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-dd-MM");
 				                String formattedDates = dateFormats.format(currentDate);
 				        		
-				        		db.timeOutCheck(NameLabel.getText(), formattedDates);
+//				          		Time In
+				                SimpleDateFormat TimeInFormat = new SimpleDateFormat("hh:mm a");
+				                String timeOut = TimeInFormat.format(calendar.getTime());
+				                
+				                Double tard = db.getEmployeeTardiness(ID, formattedDates);
+				                
+				        		if (db.timeOutCheck(NameLabel.getText(), formattedDates)) {
+				        			System.out.println("pwede kapa mag time Out");
+				        			
+				        			
+				        			try {
+				        				
+										db.updateAttendance(ID, formattedDates,timeOut,8.0 - tard);
+				        				
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+//				        			
+				        			
+				        		};
 				        	}
 				        });
 				        timeOutButton.setHorizontalAlignment(SwingConstants.CENTER);

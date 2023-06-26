@@ -393,6 +393,30 @@ public class Database {
       } 
   }
   
+  
+//check TimeIn 
+public double getEmployeeTardiness(int ID,String Date){
+    try{
+        String query = "SELECT `tardiness` FROM " + 
+                "`attendance`" + " WHERE employID='"+ ID + "' AND date='" + Date + "'";
+        ResultSet result =  getConnected().executeQuery(query);
+        double tard = 0.0;
+        
+        while(result.next()){
+        	tard = result.getDouble("tardiness");
+        }
+        
+        System.out.println(tard);
+        conn.close();
+        return tard;
+ 
+    }catch(Exception e){
+        System.out.println(e);
+    }
+    
+	return 0; 
+}
+
 //check TimeIn 
 public boolean timeOutCheck(String Name,String Date){
     try{
@@ -406,7 +430,7 @@ public boolean timeOutCheck(String Name,String Date){
         
         System.out.println(timeOut);
         
-        if(timeOut == "N/A"){
+        if(timeOut.equals("N/A")){
             System.out.println("time out");
             conn.close();
             return true;
