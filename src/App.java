@@ -1,6 +1,17 @@
 import java.sql.SQLException;
 
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
+
+
 public class App {
+	
+//    private static int getWeekNumber() {
+//        LocalDate currentDate = LocalDate.now();
+//        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+//        return currentDate.get(weekFields.weekOfWeekBasedYear());
+//    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -25,6 +36,13 @@ public class App {
 			
 //			create attendance table 
 			db.createAttendance();
+			
+//			create employee payroll History
+			db.showEmployeeID();
+			
+//			db.updateEmployeePayrol_History("1", 0.1, 0.1, 0.1, 0.1, 0.1);
+//			db.showEmployeePayrol_History("1");
+//			db.showSalary("1");
 			
 //			db.addAttendance(0, "hello", "friend", "hello", "friend", 0, 0);
 			

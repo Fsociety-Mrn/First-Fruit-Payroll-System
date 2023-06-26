@@ -198,7 +198,7 @@ public class ADMIN extends JFrame {
 		});
 		employelist.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		employelist.setHorizontalAlignment(SwingConstants.CENTER);
-		employelist.setBounds(10, 11, 202, 31);
+		employelist.setBounds(0, 0, 222, 53);
 		employeListButton.add(employelist);
 		
 
@@ -228,7 +228,7 @@ public class ADMIN extends JFrame {
 		});
 		employeeattendance.setHorizontalAlignment(SwingConstants.CENTER);
 		employeeattendance.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		employeeattendance.setBounds(10, 11, 202, 31);
+		employeeattendance.setBounds(0, 0, 222, 53);
 		employeeAttendanceButton.add(employeeattendance);
 		
 
@@ -259,7 +259,7 @@ public class ADMIN extends JFrame {
 		});
 		addemployee.setHorizontalAlignment(SwingConstants.CENTER);
 		addemployee.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		addemployee.setBounds(10, 11, 202, 31);
+		addemployee.setBounds(0, 0, 222, 53);
 		addEmployeeButton.add(addemployee);
 		
 		JLabel TIME = new JLabel(formattedTime);

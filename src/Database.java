@@ -3,11 +3,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collections;
-import javax.swing.JComboBox;  
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
 
 public class Database {
 	
@@ -495,6 +500,213 @@ public boolean timeOutCheck(String Name,String Date){
         } 
     }
     
+    
+ // SHOW employee IDs
+    public void showEmployeeID() {
+        
+        try{
+
+            String query = "SELECT * FROM `employee`";
+            ResultSet result = getConnected().executeQuery(query);
+            
+            while(result.next()){
+            	
+//            	create a payroll History
+            	createEmployeePayrollHistory(result.getString("ID"));
+            	insertEmployeePayrol_History(result.getString("ID"));
+            	System.out.println(result.getString("ID"));
+            }            
+            
+            conn.close();      
+        }catch(Exception e){
+            System.out.println(e);
+ 
+        } 
+
+    }
+    
+    
+    // SHOW employee IDs
+    public int showSalary(String ID) {
+        
+        try{
+
+            String query = "SELECT `salary` FROM `employee` WHERE `ID` = '" + ID + "'";
+            ResultSet result = getConnected().executeQuery(query);
+            int salary = 0;
+            while(result.next()){
+            	
+            	System.out.println(result.getInt("salary"));
+            	
+            	salary = result.getInt("salary");
+            	
+//            	return result.getInt("salary");
+            }            
+            
+            conn.close(); 
+            return salary;
+        }catch(Exception e){
+            System.out.println(e);
+ 
+        } 
+        
+        return 0;
+
+    }
+    
+
+//    create employee payroll history
+    private void createEmployeePayrollHistory(String ID) throws SQLException {
+    	
+        try {
+        	
+
+          
+
+           // Create the login table
+          String createTableQuery = "CREATE TABLE IF NOT EXISTS `" + ID + "_payrolHistory` (`weeklyID` INT NOT NULL , `workHours` DOUBLE NOT NULL , `tardiness` DOUBLE NOT NULL , `totalDeduction` DOUBLE NOT NULL , `totalGrossPay` DOUBLE NOT NULL , `netIncome` DOUBLE NOT NULL , PRIMARY KEY (`weeklyID`)) ENGINE = InnoDB;";
+          getConnected().executeUpdate(createTableQuery);
+          System.out.println("employee payroll created successfully.");
+
+          // Close the statement and connection
+          state.close();
+          conn.close();
+
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        	  System.out.println("weekly employee table");
+           System.out.println(e.toString());
+         
+        } 
+    }
+    
+    
+//  insert payroll HIstorry
+    public void insertEmployeePayrol_History(String ID) throws SQLException {
+        try {
+        	
+   		 // Create a Calendar instance
+           Calendar calendar = Calendar.getInstance();
+            
+            // Get the current date
+           Date currentDates = calendar.getTime();
+            
+            // Format the date
+           SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+           String formattedDate = dateFormat.format(currentDates);
+            
+
+//          weekly table
+          LocalDate currentDate = LocalDate.now();
+          WeekFields weekFields = WeekFields.of(Locale.getDefault());
+          int weekly = currentDate.get(weekFields.weekOfWeekBasedYear());
+
+            // Insert data into the login table
+            String insertDataQuery = "INSERT INTO `"+ID+"_payrolhistory` (`weeklyID`, `workHours`, `tardiness`, `totalDeduction`, `totalGrossPay`, `netIncome`) VALUES ('" + weekly +"', '0.0', '0.0', '0.0', '0.0', '0.0')";
+            getConnected().executeUpdate(insertDataQuery);
+            System.out.println("payroll history created!");
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            System.out.println(e.toString());
+            System.out.println("Default Data exist");
+        } 
+    }
+    
+    
+//  add attendance | Time Out
+    public void updateEmployeePayrol_History(
+    		String ID, 
+    		double workHours, 
+    		double tard,
+    		double deduc, 
+    		double grossPay, 
+    		double netIncome) throws SQLException {
+    	
+        try {
+        	
+//          weekly table
+        	LocalDate currentDate = LocalDate.now();
+        	WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        	int weekly = currentDate.get(weekFields.weekOfWeekBasedYear());
+        	
+            // Insert data into the login table
+            String updateDataQuery = "UPDATE `" + ID +"_payrolhistory` SET `workHours` = '" + workHours + "', `tardiness` = '" + tard +"', `totalDeduction` = '" + deduc + "', `totalGrossPay` = '" + grossPay + "', `netIncome` = '" + netIncome +"' WHERE `weeklyID` = " + weekly;
+            int rows = getConnected().executeUpdate(updateDataQuery);
+            
+            System.out.println("Updated Payrol_History successfully " + rows);
+
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            // Close the statement and connection
+            state.close();
+            conn.close();
+            
+            System.out.println("Default Data exist");
+        } 
+    } 
+    
+
+    // SHOW ALL ROWS IN Employee Table
+    public void showEmployeePayrol_History(
+    		String ID, 
+    		JLabel workHours,
+    		JLabel tardiness,
+    		JLabel grossPay,
+    		JLabel netIncome){
+    	
+            try{
+            	
+
+    
+            String query = "SELECT * FROM `"+ID+"_payrolhistory`";
+            ResultSet result = getConnected().executeQuery(query);
+            
+            while(result.next()){
+//                String data[] = {
+//                		result.getString("weeklyID"),
+//                		result.getString("workHours"),
+//                		result.getString("tardiness"),
+//                		result.getString("totalDeduction"),
+//                		result.getString("totalGrossPay"),
+//                		result.getString("netIncome")
+//                		
+//                		
+//                };
+            	
+            	workHours.setText(result.getString("workHours"));
+            	tardiness.setText(result.getString("tardiness"));
+            	grossPay.setText(result.getString("totalDeduction"));
+            	netIncome.setText(result.getString("totalGrossPay"));
+            	netIncome.setText(result.getString("netIncome"));
+            	
+//            	System.out.println(result.getString("weeklyID"));
+//            	System.out.println(result.getString("workHours"));
+//            	System.out.println(result.getString("tardiness"));
+//            	System.out.println(result.getString("totalDeduction"));
+//            	System.out.println(result.getString("totalGrossPay"));
+//            	System.out.println(result.getString("netIncome"));
+            }            
+            
+            conn.close();      
+        }catch(Exception e){
+            System.out.println(e);
+ 
+        } 
+    }
     
     
 }

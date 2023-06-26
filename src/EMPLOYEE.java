@@ -203,7 +203,7 @@ public class EMPLOYEE extends JFrame {
 		});
 		employelist.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		employelist.setHorizontalAlignment(SwingConstants.CENTER);
-		employelist.setBounds(10, 11, 202, 31);
+		employelist.setBounds(0, 0, 222, 53);
 		employeListButton.add(employelist);
 		
 
@@ -230,7 +230,7 @@ public class EMPLOYEE extends JFrame {
 		});
 		employeeattendance.setHorizontalAlignment(SwingConstants.CENTER);
 		employeeattendance.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		employeeattendance.setBounds(10, 11, 202, 31);
+		employeeattendance.setBounds(0, 0, 222, 53);
 		employeeAttendanceButton.add(employeeattendance);
 		
 
@@ -259,7 +259,7 @@ public class EMPLOYEE extends JFrame {
 		});
 		addemployee.setHorizontalAlignment(SwingConstants.CENTER);
 		addemployee.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		addemployee.setBounds(10, 11, 202, 31);
+		addemployee.setBounds(0, 0, 222, 53);
 		addEmployeeButton.add(addemployee);
 		
 		JLabel TIME = new JLabel(formattedTime);
@@ -322,22 +322,22 @@ public class EMPLOYEE extends JFrame {
 				        lblDeducionSummary.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 				        panel.add(lblDeducionSummary);
 				        
-				        JLabel lblSss = new JLabel("SSS: 2323");
+				        JLabel lblSss = new JLabel("SSS: 99");
 				        lblSss.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				        lblSss.setBounds(72, 49, 225, 40);
 				        panel.add(lblSss);
 				        
-				        JLabel lblSss_1 = new JLabel("PhilHealth: 2323");
+				        JLabel lblSss_1 = new JLabel("PhilHealth: 40");
 				        lblSss_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				        lblSss_1.setBounds(72, 71, 225, 40);
 				        panel.add(lblSss_1);
 				        
-				        JLabel lblSss_2 = new JLabel("PagIbig: 2323");
+				        JLabel lblSss_2 = new JLabel("PagIbig: 20");
 				        lblSss_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				        lblSss_2.setBounds(72, 97, 225, 40);
 				        panel.add(lblSss_2);
 				        
-				        JLabel lblSss_2_2 = new JLabel("Total Deduction: 5050");
+				        JLabel lblSss_2_2 = new JLabel("Total Deduction: 159");
 				        lblSss_2_2.setHorizontalAlignment(SwingConstants.CENTER);
 				        lblSss_2_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				        lblSss_2_2.setBounds(10, 148, 333, 40);
@@ -346,7 +346,7 @@ public class EMPLOYEE extends JFrame {
 				        JPanel totalGross = new JPanel();
 				        totalGross.setLayout(null);
 				        totalGross.setBorder(new LineBorder(new Color(0, 0, 0)));
-				        totalGross.setBounds(10, 92, 353, 246);
+				        totalGross.setBounds(10, 120, 353, 214);
 				        TimeInOut.add(totalGross);
 				        
 				        JLabel TotalGrossPay = new JLabel("Total Gross Pay summary");
@@ -355,36 +355,46 @@ public class EMPLOYEE extends JFrame {
 				        TotalGrossPay.setBounds(10, 11, 333, 27);
 				        totalGross.add(TotalGrossPay);
 				        
-				        JLabel workDaysLabel = new JLabel("Total Regular work days: 12");
+				        JLabel workDaysLabel = new JLabel("Total Regular work days: 0");
 				        workDaysLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 				        workDaysLabel.setBounds(53, 49, 290, 40);
 				        totalGross.add(workDaysLabel);
 				        
-				        JLabel workHoursLabel = new JLabel("Regular Work hours: 0");
+				        JLabel workHoursLabel = new JLabel("Regular Work hours:");
 				        workHoursLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        workHoursLabel.setBounds(53, 71, 290, 40);
+				        workHoursLabel.setBounds(53, 71, 162, 40);
 				        totalGross.add(workHoursLabel);
 				        
-				        JLabel absentLabel = new JLabel("LESS: Absent days: 0");
-				        absentLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        absentLabel.setBounds(53, 97, 290, 40);
-				        totalGross.add(absentLabel);
-				        
-				        JLabel totalGrossLabel = new JLabel("Total Gross pay: 123");
+				        JLabel totalGrossLabel = new JLabel("Total Gross pay: ");
 				        totalGrossLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				        totalGrossLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        totalGrossLabel.setBounds(10, 199, 333, 40);
+				        totalGrossLabel.setBounds(10, 171, 333, 40);
 				        totalGross.add(totalGrossLabel);
 				        
-				        JLabel tardinessLabel = new JLabel("LESS: Tardiness Hours: 2");
+				        JLabel tardinessLabel = new JLabel("LESS: Tardiness Hours: ");
 				        tardinessLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        tardinessLabel.setBounds(53, 122, 290, 40);
+				        tardinessLabel.setBounds(53, 95, 174, 40);
 				        totalGross.add(tardinessLabel);
 				        
-				        JLabel rateLabel = new JLabel("Daily Rate: 230");
+				        JLabel rateLabel = new JLabel("Daily Rate: " + db.showSalary(String.valueOf(ID)));
 				        rateLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-				        rateLabel.setBounds(53, 148, 290, 40);
+				        rateLabel.setBounds(53, 120, 290, 40);
 				        totalGross.add(rateLabel);
+				        
+				        JLabel tardinessResult = new JLabel("0");
+				        tardinessResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        tardinessResult.setBounds(225, 95, 118, 40);
+				        totalGross.add(tardinessResult);
+				        
+				        JLabel regularResult = new JLabel("0");
+				        regularResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        regularResult.setBounds(210, 71, 133, 40);
+				        totalGross.add(regularResult);
+				        
+				        JLabel grosspayResult = new JLabel("0");
+				        grosspayResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+				        grosspayResult.setBounds(236, 171, 107, 40);
+				        totalGross.add(grosspayResult);
 				        
 				        JPanel netIncome = new JPanel();
 				        netIncome.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -392,23 +402,28 @@ public class EMPLOYEE extends JFrame {
 				        TimeInOut.add(netIncome);
 				        netIncome.setLayout(null);
 				        
-				        JLabel netIncomeLabel = new JLabel("Net Income: 4000");
-				        netIncomeLabel.setBounds(10, 87, 456, 27);
+				        JLabel netIncomeLabel = new JLabel("Net Income: ");
+				        netIncomeLabel.setBounds(10, 87, 393, 27);
 				        netIncome.add(netIncomeLabel);
 				        netIncomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				        netIncomeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 				        
-				        JLabel deductionLabel = new JLabel("LESS: Total Deductions: 123");
+				        JLabel deductionLabel = new JLabel("LESS: Total Deductions: 159");
 				        deductionLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				        deductionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 				        deductionLabel.setBounds(10, 49, 456, 27);
 				        netIncome.add(deductionLabel);
 				        
-				        JLabel grossPayResult = new JLabel("Total Gross pay: 23123");
-				        grossPayResult.setHorizontalAlignment(SwingConstants.CENTER);
-				        grossPayResult.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				        grossPayResult.setBounds(10, 11, 456, 27);
-				        netIncome.add(grossPayResult);
+				        JLabel grossPayResultLabel = new JLabel("Total Gross pay: 23123");
+				        grossPayResultLabel.setHorizontalAlignment(SwingConstants.CENTER);
+				        grossPayResultLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				        grossPayResultLabel.setBounds(10, 11, 456, 27);
+				        netIncome.add(grossPayResultLabel);
+				        
+				        JLabel netIncomeResult = new JLabel("0");
+				        netIncomeResult.setBounds(259, 87, 207, 27);
+				        netIncome.add(netIncomeResult);
+				        netIncomeResult.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 				        
 				        JPanel timeIn = new JPanel();
 				        JPanel timeOut = new JPanel();
@@ -532,6 +547,8 @@ public class EMPLOYEE extends JFrame {
 				        			try {
 				        				
 										db.updateAttendance(ID, formattedDates,timeOut,8.0 - tard);
+										
+//										db.updateEmployeePayrol_History(String.valueOf(ID), ID, ID, ID, ID, ID);
 				        				
 									} catch (SQLException e1) {
 										// TODO Auto-generated catch block
@@ -589,7 +606,11 @@ public class EMPLOYEE extends JFrame {
 			        		timeIn.setVisible(true);
 			        		timeOut.setVisible(false);
 				        }
-						
+				        
+				        db.showEmployeePayrol_History(String.valueOf(ID), regularResult, tardinessResult, grosspayResult, netIncomeResult);
+				        
+				        grossPayResultLabel.setText("Total Gross pay: " + grosspayResult.getText());
+//						
 						
 						
 	}
