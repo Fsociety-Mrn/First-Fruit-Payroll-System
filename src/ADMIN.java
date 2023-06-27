@@ -51,7 +51,7 @@ public class ADMIN extends JFrame {
 	private JTextField NameTextfield;
 	private JTextField rate;
 	private JTable employeeAttendance;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -74,9 +74,9 @@ public class ADMIN extends JFrame {
 	 * Create the frame.
 	 */
 	public ADMIN() {
-        
+		
+		employeeAttendance = new JTable();
         JPanel EmployeeList = new JPanel();
-        JPanel EmployeeAttendance = new JPanel();
         JPanel AddEmployee = new JPanel();
 		
 		 // Create a Calendar instance
@@ -86,7 +86,7 @@ public class ADMIN extends JFrame {
         Date currentDate = calendar.getTime();
         
         // Format the date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EE, MMM d yyyy");
         String formattedDate = dateFormat.format(currentDate);
         
         // Display the formatted date
@@ -124,6 +124,39 @@ public class ADMIN extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		JPanel EmployeeAttendance = new JPanel();
+		
+	
+		EmployeeAttendance.setBounds(256, 113, 764, 476);
+		contentPane.add(EmployeeAttendance);
+		EmployeeAttendance.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 58, 744, 407);
+		EmployeeAttendance.add(scrollPane_1);
+		
+
+		employeeAttendance.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"employee ID", "Name", "Time In", "Time Out", "work hours", "tardiness"
+			}
+		));
+		scrollPane_1.setViewportView(employeeAttendance);
+		
+		var comboBox_1 = new JComboBox<String>();
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//		        show all dates
+		       db.showAttendance_dATE(comboBox_1);
+		       db.showRows_Attendace(employeeAttendance, String.valueOf(comboBox_1.getSelectedObjects()));
+			}
+		});
+		comboBox_1.setBackground(Color.WHITE);
+		comboBox_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+		comboBox_1.setBounds(210, 11, 277, 36);
+		EmployeeAttendance.add(comboBox_1);
 		
 //        JPanel EmployeeList = new JPanel();
 //        JPanel AddEmployee = new JPanel();
@@ -146,7 +179,7 @@ public class ADMIN extends JFrame {
 		logoutButton.setLayout(null);
 		
 		JLabel logout = new JLabel("Logout");
-		logout.setBounds(10, 11, 202, 20);
+		logout.setBounds(0, 0, 222, 42);
 		logoutButton.add(logout);
 		logout.addMouseListener(new MouseAdapter() {
 			@Override
@@ -219,6 +252,11 @@ public class ADMIN extends JFrame {
 			    EmployeeList.setVisible(false);
 		        AddEmployee.setVisible(false);
 		        EmployeeAttendance.setVisible(true);
+		        
+		       
+//		        show all dates
+		       db.showAttendance_dATE(comboBox_1);
+		       db.showRows_Attendace(employeeAttendance, String.valueOf(comboBox_1.getSelectedObjects()));
 			}
 			
 			@Override
@@ -349,7 +387,7 @@ public class ADMIN extends JFrame {
         	printEmployee.setHorizontalAlignment(SwingConstants.CENTER);
         	printEmployee.setForeground(Color.WHITE);
         	printEmployee.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        	printEmployee.setBounds(10, 11, 202, 20);
+        	printEmployee.setBounds(0, 0, 222, 42);
         	printtmployeeButton.add(printEmployee);
         	
         	JScrollPane employeeListPane = new JScrollPane();
@@ -401,27 +439,8 @@ public class ADMIN extends JFrame {
 				        refreshListButton.setHorizontalAlignment(SwingConstants.CENTER);
 				        refreshListButton.setForeground(Color.WHITE);
 				        refreshListButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-				        refreshListButton.setBounds(10, 11, 202, 20);
+				        refreshListButton.setBounds(0, 0, 222, 42);
 				        refreshEmployeeList.add(refreshListButton);
-				        
-	
-				        EmployeeAttendance.setBounds(256, 113, 764, 476);
-				        contentPane.add(EmployeeAttendance);
-				        EmployeeAttendance.setLayout(null);
-				        
-				        JScrollPane scrollPane_1 = new JScrollPane();
-				        scrollPane_1.setBounds(10, 11, 744, 454);
-				        EmployeeAttendance.add(scrollPane_1);
-				        
-				        employeeAttendance = new JTable();
-				        employeeAttendance.setModel(new DefaultTableModel(
-				        	new Object[][] {
-				        	},
-				        	new String[] {
-				        		"employee ID", "Name", "Time In", "Time Out", "work hours", "tardiness"
-				        	}
-				        ));
-				        scrollPane_1.setViewportView(employeeAttendance);
 				        
         JComboBox comboBox = new JComboBox();
 

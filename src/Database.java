@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -6,13 +7,16 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Database {
 	
@@ -333,12 +337,15 @@ public class Database {
             }else{
                 System.out.println("Login failed");
                 conn.close();
+                
+                JOptionPane.showMessageDialog(null, "Login failed!");
                 return false;
             }
             
             
         }catch(Exception e){
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "System Error");
             return false;
         } 
     }
@@ -360,13 +367,14 @@ public class Database {
           }else{
               System.out.println("Login failed");
               conn.close();
-  
+              JOptionPane.showMessageDialog(null, "Login failed!");
               return 0;
           }
           
           
       }catch(Exception e){
           System.out.println(e);
+          JOptionPane.showMessageDialog(null, "System Error");
           return 0;
       } 
     }
@@ -486,6 +494,69 @@ public boolean timeOutCheck(String Name,String Date){
             
             while(result.next()){
                 String data[] = {result.getString("ID"),result.getString("Name")};
+                tblmodel.addRow(data);
+                
+                
+            	
+            	System.out.println(data);
+            }            
+            
+            conn.close();      
+        }catch(Exception e){
+            System.out.println(e);
+ 
+        } 
+    }
+    
+    
+//  get all rows in employee tables
+  public void showAttendance_dATE(JComboBox<String> jComboBox1) {
+  	
+  	
+      try{
+          
+          ArrayList<String> weeklyIDs = new ArrayList<String>();
+          
+          String query = "SELECT `date` FROM `attendance`";
+          ResultSet result = getConnected().executeQuery(query);
+          while(result.next()){
+          	System.out.println(result.getString("date"));
+          	weeklyIDs.add(result.getString("date"));
+          }
+          
+          conn.close();
+          
+          jComboBox1.removeAllItems();
+          
+          weeklyIDs.forEach(item->jComboBox1.addItem(item));
+
+          
+      }catch(Exception e){
+          System.out.println(e);
+      }
+  	
+  }
+    
+    // SHOW ALL ROWS IN Attenadcane Table
+    public void showRows_Attendace(JTable table, String date){
+            try{
+            	
+
+            DefaultTableModel tblmodel = (DefaultTableModel)table.getModel();
+            tblmodel.setRowCount(0);
+            
+            String query = "SELECT * FROM `attendance` WHERE `date` = '" + date +"'";
+            ResultSet result = getConnected().executeQuery(query);
+            
+            while(result.next()){
+                String data[] = {
+                		result.getString("employID"),
+                		result.getString("Name"),
+                		result.getString("TimeIn"),
+                		result.getString("TimeOut"),
+                		result.getString("workHours"),
+                		result.getString("tardiness")
+                	};
                 tblmodel.addRow(data);
                 
                 
@@ -672,41 +743,122 @@ public boolean timeOutCheck(String Name,String Date){
             	
 
     
-            String query = "SELECT * FROM `"+ID+"_payrolhistory`";
+            	String query = "SELECT * FROM `"+ID+"_payrolhistory`";
+            	ResultSet result = getConnected().executeQuery(query);
+            
+            	while(result.next()){
+            	
+            		workHours.setText(result.getString("workHours"));
+            		tardiness.setText(result.getString("tardiness"));
+            		grossPay.setText(result.getString("totalGrossPay"));
+            		netIncome.setText(result.getString("netIncome"));
+            	
+
+            	}            
+            
+            	conn.close();      
+            }catch(Exception e){
+            	System.out.println(e);
+ 
+            } 
+    	}
+    
+//    get all rows in employee tables
+    public void showPayroll_historyID(JComboBox<String> jComboBox1, String ID) {
+    	
+    	
+        try{
+            
+            ArrayList<String> weeklyIDs = new ArrayList<String>();
+            
+            String query = "SELECT `weeklyID` FROM `"+ ID +"_payrolhistory`";
             ResultSet result = getConnected().executeQuery(query);
-            
             while(result.next()){
-//                String data[] = {
-//                		result.getString("weeklyID"),
-//                		result.getString("workHours"),
-//                		result.getString("tardiness"),
-//                		result.getString("totalDeduction"),
-//                		result.getString("totalGrossPay"),
-//                		result.getString("netIncome")
-//                		
-//                		
-//                };
-            	
-            	workHours.setText(result.getString("workHours"));
-            	tardiness.setText(result.getString("tardiness"));
-//            	grossPay.setText(result.getString("totalDeduction"));
-            	grossPay.setText(result.getString("totalGrossPay"));
-            	netIncome.setText(result.getString("netIncome"));
-            	
-//            	System.out.println(result.getString("weeklyID"));
-//            	System.out.println(result.getString("workHours"));
-//            	System.out.println(result.getString("tardiness"));
-//            	System.out.println(result.getString("totalDeduction"));
-//            	System.out.println(result.getString("totalGrossPay"));
-//            	System.out.println(result.getString("netIncome"));
-            }            
+            	System.out.println(result.getString("weeklyID"));
+            	weeklyIDs.add(result.getString("weeklyID"));
+            }
             
-            conn.close();      
+            conn.close();
+            
+            jComboBox1.removeAllItems();
+            
+            weeklyIDs.forEach(item->jComboBox1.addItem(item));
+ 
+            
         }catch(Exception e){
             System.out.println(e);
- 
-        } 
+        }
+    	
     }
+    
+    // SHOW ALL ROWS IN payroll Table
+    public void showPayroll_history(
+    		String ID, 
+    		String weeklyID,
+    		JLabel workDays,
+    		JLabel workHours,
+    		JLabel tardiness,
+    		JLabel grossPay,
+    		JLabel netIncome){
+    	
+            try{
+            	
+
+    
+            	String query = "SELECT * FROM `"+ID+"_payrolhistory` WHERE `weeklyID` = '" + weeklyID + "'";
+            	ResultSet result = getConnected().executeQuery(query);
+            
+            	while(result.next()){
+            		
+            		double workHourss = result.getDouble("workHours");
+            		double workDaysss = workHourss / 8.0;
+            		
+            		workDays.setText("Total Regular work days: " + String.valueOf(workDaysss));
+            		
+            		workHours.setText(result.getString("workHours"));
+            		tardiness.setText(result.getString("tardiness"));
+            		grossPay.setText(result.getString("totalGrossPay"));
+            		netIncome.setText(result.getString("netIncome"));
+            	
+
+            	}            
+            
+            	conn.close();      
+            }catch(Exception e){
+            	System.out.println(e);
+ 
+            } 
+    	}
+    
+    public void changePassword(String ID, String OldPass, String newPass) throws SQLException {
+        try {
+            // Verify the ID and old password
+            String verifyQuery = "SELECT * FROM `employee` WHERE `ID` = '" + ID + "' AND `Password` = '" + OldPass + "'";
+            ResultSet resultSet = getConnected().executeQuery(verifyQuery);
+
+            if (resultSet.next()) {
+                // ID and old password are valid, proceed with password change
+                String updateDataQuery = "UPDATE `employee` SET `Password` = '" + newPass + "' WHERE `ID` = '" + ID + "'";
+                int rows = getConnected().executeUpdate(updateDataQuery);
+
+                System.out.println("Password Change: " + rows);
+                JOptionPane.showMessageDialog(null, "Password Changed!");
+            } else {
+                // ID or old password is incorrect
+                JOptionPane.showMessageDialog(null, "Incorrect ID or old password!");
+            }
+
+            // Close the result set and connection
+            resultSet.close();
+            conn.close();
+
+        } catch (Exception e) {
+            // Close the connection
+            JOptionPane.showMessageDialog(null, "An error occurred while changing the password!");
+            System.out.println(e.toString());
+        }
+    }
+
     
     
 }
