@@ -36,7 +36,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 
@@ -414,7 +416,7 @@ public class EMPLOYEE extends JFrame {
 				        deductionLabel.setBounds(10, 49, 456, 27);
 				        netIncome.add(deductionLabel);
 				        
-				        JLabel grossPayResultLabel = new JLabel("Total Gross pay: 23123");
+				        JLabel grossPayResultLabel = new JLabel("Total Gross pay: " + grosspayResult.getText());
 				        grossPayResultLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				        grossPayResultLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 				        grossPayResultLabel.setBounds(10, 11, 456, 27);
@@ -455,9 +457,6 @@ public class EMPLOYEE extends JFrame {
 				        	    // Get the current date
 				                Date currentDateNow = calendar.getTime();
 				        	
-				      
-				        		String name = "";
-				        	
 				                
 				                // Format the date
 				                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
@@ -472,6 +471,7 @@ public class EMPLOYEE extends JFrame {
 //				          		Time In
 				                SimpleDateFormat TimeInFormat = new SimpleDateFormat("hh:mm a");
 				                String timeIn = TimeInFormat.format(calendar.getTime());
+				                
 				                String timeOut = "N/A";
 				                
 				                int workHours = 0;
@@ -485,9 +485,7 @@ public class EMPLOYEE extends JFrame {
 				                // Calculate the time difference in minutes
 				                long minutesLate = ChronoUnit.MINUTES.between(idealTime, currentTime);
 
-				                // Calculate the time difference in hours
-				                long hoursLate = ChronoUnit.HOURS.between(idealTime, currentTime);
-				             
+				      
 			                    double tardiness = (minutesLate / 60.0);
 			                    
 			        			try {
@@ -527,26 +525,49 @@ public class EMPLOYEE extends JFrame {
 				        	
 				        	@Override
 				        	public void mouseClicked(MouseEvent e) {
+				        		
 				        		timeIn.setVisible(true);
 				        		timeOut.setVisible(false);
 				        		
+//				          		Time Out
+				                SimpleDateFormat timeOutFormat = new SimpleDateFormat("hh:mm a");
+				                
+				                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+				                
+				                String timeOut = timeOutFormat.format(calendar.getTime());
+				        		
+				                LocalTime enterTime = LocalTime.of(8, 0, 0);
+				                LocalTime timeOuts = LocalTime.parse(timeOut,formatter);
+				                
+
+
+				                // Calculate the duration between clock in and clock out times
+				                Duration workedDuration = Duration.between(enterTime, timeOuts);
+				                
+				                // Adjust worked hours if time-out is after 7 PM
+				                if (timeOuts.isAfter(LocalTime.of(17, 0, 0))) {
+				                    workedDuration = Duration.ofHours(8);
+				                }
+
+
+				                double workHours = (workedDuration.toMinutes()/60.0);
+
 				        		// Format the date
 				                SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-dd-MM");
 				                String formattedDates = dateFormats.format(currentDate);
 				        		
-//				          		Time In
-				                SimpleDateFormat TimeInFormat = new SimpleDateFormat("hh:mm a");
-				                String timeOut = TimeInFormat.format(calendar.getTime());
 				                
 				                Double tard = db.getEmployeeTardiness(ID, formattedDates);
+		
 				                
 				        		if (db.timeOutCheck(NameLabel.getText(), formattedDates)) {
+				        			
 				        			System.out.println("pwede kapa mag time Out");
 				        			
 				        			
 				        			try {
 				        				
-										db.updateAttendance(ID, formattedDates,timeOut,8.0 - tard);
+										db.updateAttendance(ID, formattedDates,timeOut,(workHours - tard));
 										
 //										db.updateEmployeePayrol_History(String.valueOf(ID), ID, ID, ID, ID, ID);
 				        				
@@ -557,6 +578,8 @@ public class EMPLOYEE extends JFrame {
 //				        			
 				        			
 				        		};
+				        		
+				        	
 				        	}
 				        });
 				        timeOutButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -607,11 +630,51 @@ public class EMPLOYEE extends JFrame {
 			        		timeOut.setVisible(false);
 				        }
 				        
+				        
+				        
 				        db.showEmployeePayrol_History(String.valueOf(ID), regularResult, tardinessResult, grosspayResult, netIncomeResult);
 				        
-				        grossPayResultLabel.setText("Total Gross pay: " + grosspayResult.getText());
-//						
+	
+//				        compute the total netincome 
+				        Double workHours = Double.parseDouble(regularResult.getText());
+				        Double tardiness = Double.parseDouble(tardinessResult.getText());
+				        
+				        Double workdays = (workHours - tardiness) / 8;
+				        workDaysLabel.setText("Total Regular work days: " + String.valueOf(workdays));
+				        
+				        int rate = db.showSalary(String.valueOf(ID));
+				        
+				        double grossPay = workdays * rate;
+     
+				        grosspayResult.setText(String.valueOf(grossPay));
+				        
+				        grossPayResultLabel.setText("Total Gross pay: " + grossPay);
+				       
+				        
+				        if (grossPay != 0) {
+				        	
+				        	netIncomeResult.setText(String.valueOf(grossPay - 159));
+				        }
 						
+				       
+						try {
+							
+
+//							updated the result
+							db.updateEmployeePayrol_History(String.valueOf(ID), workHours, tardiness, 159, grossPay, Double.parseDouble(netIncomeResult.getText()));
+							
+//					        get the workhours and tardiness result yesterday
+					        db.showEmployeePayrol_History(String.valueOf(ID), regularResult, tardinessResult, grosspayResult, netIncomeResult);
+					        
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						
+
+				        
 	}
 }

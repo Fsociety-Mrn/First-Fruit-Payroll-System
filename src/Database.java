@@ -300,7 +300,7 @@ public class Database {
             // Insert data into the login table
             String updateDataQuery = "UPDATE `attendance` SET `TimeOut` = '"+TimeOut+"', `workHours` = '"+workHours+"' WHERE `employID` = '"+ID+"' AND `date` = '"+Date+"'";
             int rows = getConnected().executeUpdate(updateDataQuery);
-            System.out.println("Attendance table successfully." + rows);
+            System.out.println("Attendance table successfully. " + rows);
 
             // Close the statement and connection
             state.close();
@@ -689,8 +689,8 @@ public boolean timeOutCheck(String Name,String Date){
             	
             	workHours.setText(result.getString("workHours"));
             	tardiness.setText(result.getString("tardiness"));
-            	grossPay.setText(result.getString("totalDeduction"));
-            	netIncome.setText(result.getString("totalGrossPay"));
+//            	grossPay.setText(result.getString("totalDeduction"));
+            	grossPay.setText(result.getString("totalGrossPay"));
             	netIncome.setText(result.getString("netIncome"));
             	
 //            	System.out.println(result.getString("weeklyID"));
