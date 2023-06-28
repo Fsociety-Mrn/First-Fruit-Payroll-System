@@ -274,11 +274,15 @@ public class EMPLOYEE extends JFrame {
 //		ewmployee rate
         int rate = db.showSalary(String.valueOf(ID));
 		
-		
-		if (db.timeInCheck(String.valueOf(ID),formattedDatesss) == false) {
-			timeIn_2.setVisible(false);
-			timeOut_2.setVisible(true);
-		}
+     
+//		System.out.println(db.timeInCheck(String.valueOf(ID),formattedDatesss));
+//		if (db.timeInCheck(String.valueOf(ID),formattedDatesss) == false) {
+//			timeIn_2.setVisible(false);
+//			timeOut_2.setVisible(true);
+//		}else {
+//			timeIn_2.setVisible(true);
+//			timeOut_2.setVisible(false);
+//		}
 		
 		
 	
@@ -322,6 +326,331 @@ public class EMPLOYEE extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+								
+										        
+		
+										        TimeInOut.setBackground(Color.WHITE);
+										        TimeInOut.setBounds(256, 113, 764, 476);
+										        contentPane.add(TimeInOut);
+										        TimeInOut.setLayout(null);
+										        
+										        JPanel panel = new JPanel();
+										        panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+										        panel.setBounds(401, 120, 353, 199);
+										        TimeInOut.add(panel);
+										        panel.setLayout(null);
+										        
+										        JLabel lblDeducionSummary = new JLabel("Deduction Summary per week");
+										        lblDeducionSummary.setHorizontalAlignment(SwingConstants.CENTER);
+										        lblDeducionSummary.setBounds(10, 11, 333, 27);
+										        lblDeducionSummary.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+										        panel.add(lblDeducionSummary);
+										        
+										        JLabel lblSss = new JLabel("SSS: 99");
+										        lblSss.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        lblSss.setBounds(72, 49, 225, 40);
+										        panel.add(lblSss);
+										        
+										        JLabel lblSss_1 = new JLabel("PhilHealth: 40");
+										        lblSss_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        lblSss_1.setBounds(72, 71, 225, 40);
+										        panel.add(lblSss_1);
+										        
+										        JLabel lblSss_2 = new JLabel("PagIbig: 20");
+										        lblSss_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        lblSss_2.setBounds(72, 97, 225, 40);
+										        panel.add(lblSss_2);
+										        
+										        JLabel lblSss_2_2 = new JLabel("Total Deduction: 159");
+										        lblSss_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+										        lblSss_2_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        lblSss_2_2.setBounds(10, 148, 333, 40);
+										        panel.add(lblSss_2_2);
+										        
+										        JPanel totalGross = new JPanel();
+										        totalGross.setLayout(null);
+										        totalGross.setBorder(new LineBorder(new Color(0, 0, 0)));
+										        totalGross.setBounds(10, 120, 353, 214);
+										        TimeInOut.add(totalGross);
+										        
+										        JLabel TotalGrossPay = new JLabel("Total Gross Pay summary");
+										        TotalGrossPay.setHorizontalAlignment(SwingConstants.CENTER);
+										        TotalGrossPay.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+										        TotalGrossPay.setBounds(10, 11, 333, 27);
+										        totalGross.add(TotalGrossPay);
+										        
+										        JLabel workDaysLabel = new JLabel("Total Regular work days: 0");
+										        workDaysLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        workDaysLabel.setBounds(53, 49, 290, 40);
+										        totalGross.add(workDaysLabel);
+										        
+										        JLabel workHoursLabel = new JLabel("Regular Work hours:");
+										        workHoursLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        workHoursLabel.setBounds(53, 71, 162, 40);
+										        totalGross.add(workHoursLabel);
+										        
+										        JLabel totalGrossLabel = new JLabel("Total Gross pay: ");
+										        totalGrossLabel.setHorizontalAlignment(SwingConstants.CENTER);
+										        totalGrossLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        totalGrossLabel.setBounds(10, 171, 333, 40);
+										        totalGross.add(totalGrossLabel);
+										        
+										        JLabel tardinessLabel = new JLabel("LESS: Tardiness Hours: ");
+										        tardinessLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        tardinessLabel.setBounds(53, 95, 174, 40);
+										        totalGross.add(tardinessLabel);
+										        
+										        JLabel rateLabel = new JLabel("Daily Rate: " + db.showSalary(String.valueOf(ID)));
+										        rateLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        rateLabel.setBounds(53, 120, 290, 40);
+										        totalGross.add(rateLabel);
+										        
+										        JLabel tardinessResult = new JLabel("0");
+										        tardinessResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        tardinessResult.setBounds(225, 95, 118, 40);
+										        totalGross.add(tardinessResult);
+										        
+										        JLabel regularResult = new JLabel("0");
+										        regularResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        regularResult.setBounds(210, 71, 133, 40);
+										        totalGross.add(regularResult);
+										        
+										        JLabel grosspayResult = new JLabel("0");
+										        grosspayResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
+										        grosspayResult.setBounds(236, 171, 107, 40);
+										        totalGross.add(grosspayResult);
+										        
+										        JPanel netIncome = new JPanel();
+										        netIncome.setBorder(new LineBorder(new Color(0, 0, 0)));
+										        netIncome.setBounds(156, 349, 476, 127);
+										        TimeInOut.add(netIncome);
+										        netIncome.setLayout(null);
+										        
+										        JLabel netIncomeLabel = new JLabel("Net Income: ");
+										        netIncomeLabel.setBounds(10, 87, 393, 27);
+										        netIncome.add(netIncomeLabel);
+										        netIncomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+										        netIncomeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+										        
+										        JLabel deductionLabel = new JLabel("LESS: Total Deductions: 159");
+										        deductionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+										        deductionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+										        deductionLabel.setBounds(10, 49, 456, 27);
+										        netIncome.add(deductionLabel);
+										        
+										        JLabel grossPayResultLabel = new JLabel("Total Gross pay: " + grosspayResult.getText());
+										        grossPayResultLabel.setHorizontalAlignment(SwingConstants.CENTER);
+										        grossPayResultLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+										        grossPayResultLabel.setBounds(10, 11, 456, 27);
+										        netIncome.add(grossPayResultLabel);
+										        
+
+										        netIncomeResult.setBounds(259, 87, 207, 27);
+										        netIncome.add(netIncomeResult);
+										        netIncomeResult.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+										        
+										        		        timeIn_2.setLayout(null);
+										        		        timeIn_2.setBorder(new LineBorder(new Color(0, 0, 0)));
+										        		        timeIn_2.setBackground(Color.WHITE);
+										        		        timeIn_2.setBounds(257, 39, 222, 42);
+										        		        TimeInOut.add(timeIn_2);
+										        		        
+										        		        JLabel timeOutButton = new JLabel("Time Out");
+										        		        JLabel timeInButton = new JLabel("Time In");
+										        		        
+										        		        timeInButton.addMouseListener(new MouseAdapter() {
+										        		        	@Override
+										        		        	public void mouseEntered(MouseEvent e) {
+										        		        		timeInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+										        		        	}
+										        		        	
+										        		        	@Override
+										        		        	public void mouseClicked(MouseEvent e) {
+										        		        		
+										        		        		
+										        		        		
+										        		        		timeIn_2.setVisible(false);
+										        		        		timeOut_2.setVisible(true);
+										        		        		
+										        		        		
+										        		        
+										        		        	    // Get the current date
+										        		                Date currentDateNow = calendar.getTime();
+										        		        	
+										        		                
+										        		                // Format the date
+										        		                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+										        		                String formattedDate = dateFormat.format(currentDateNow);
+										        		                
+										        		          		String date = formattedDate;
+										        		          		
+										        		                // Display the formatted date
+//				                System.out.println("Current Date: " + formattedDate);
+										        		                
+										        		                
+//				          		Time In
+										        		                SimpleDateFormat TimeInFormat = new SimpleDateFormat("hh:mm a");
+										        		                String timeIn = TimeInFormat.format(calendar.getTime());
+										        		                
+										        		                String timeOut = "N/A";
+										        		                
+										        		                int workHours = 0;
+										        		                
+										        		             // Get the current time
+										        		                LocalTime currentTime = LocalTime.now();
+
+										        		                // Set the ideal time to 8:00 AM
+										        		                LocalTime idealTime = LocalTime.of(8, 0, 0);
+
+										        		                // Calculate the time difference in minutes
+										        		                long minutesLate = ChronoUnit.MINUTES.between(idealTime, currentTime);
+
+				      
+			                    double tardiness = (minutesLate / 60.0);
+			                    
+			        			try {
+			        				
+			        				if (db.timeInCheck(NameLabel.getText(), formattedDate) == false) {
+			        					db.addAttendance(ID, date, NameLabel.getText(), timeIn, timeOut, workHours, tardiness);
+					        		}
+			        				
+//			        				db.addAttendance(ID, date, NameLabel.getText(), timeIn, timeOut, workHours, tardiness);
+			        				
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+			                    System.out.println(tardiness);
+
+		
+										        		        		
+										        		        	}
+										        		        });
+										        		        
+										        		        timeInButton.setHorizontalAlignment(SwingConstants.CENTER);
+										        		        timeInButton.setForeground(Color.BLACK);
+										        		        timeInButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+										        		        timeInButton.setBackground(Color.WHITE);
+										        		        timeInButton.setBounds(0, 0, 222, 42);
+										        		        timeIn_2.add(timeInButton);
+										        		        
+			
+										        		        
+										        		        timeOut_2.setLayout(null);
+										        		        timeOut_2.setBackground(Color.BLACK);
+										        		        timeOut_2.setBounds(257, 39, 222, 42);
+										        		        TimeInOut.add(timeOut_2);
+										        		        
+										        		        
+										        		        timeOutButton.addMouseListener(new MouseAdapter() {
+										        		        	@Override
+										        		        	public void mouseEntered(MouseEvent e) {
+										        		        		timeOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+										        		        	}
+										        		        	
+										        		        	@Override
+										        		        	public void mouseClicked(MouseEvent e) {
+										        		        		
+										        		        		timeIn_2.setVisible(true);
+										        		        		timeOut_2.setVisible(false);
+										        		        		
+//				          		Time Out
+										        		                SimpleDateFormat timeOutFormat = new SimpleDateFormat("hh:mm a");
+										        		                
+										        		                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+										        		                
+										        		                String timeOut = timeOutFormat.format(calendar.getTime());
+										        		        		
+										        		                LocalTime enterTime = LocalTime.of(8, 0, 0);
+										        		                LocalTime timeOuts = LocalTime.parse(timeOut,formatter);
+										        		                
+
+										        		                // Calculate the duration between clock in and clock out times
+										        		                Duration workedDuration = Duration.between(enterTime, timeOuts);
+										        		                
+										        		                // Adjust worked hours if time-out is after 7 PM
+										        		                if (timeOuts.isAfter(LocalTime.of(17, 0, 0))) {
+										        		                    workedDuration = Duration.ofHours(8);
+										        		                }
+										        		                
+										        		                
+//				                work hours
+										        		                double workHours = (workedDuration.toMinutes()/60.0);
+										        		                double currentWorkHours = Double.parseDouble(regularResult.getText());
+										        		                
+										        		                
+//				                get the current work hours
+										        		                
+
+										        		        		// Format the date
+										        		                SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-dd-MM");
+										        		                String formattedDates = dateFormats.format(currentDate);
+										        		        		
+//			
+//				                rate;
+										        		                
+										        		                Double tard = db.getEmployeeTardiness(ID, formattedDates);
+		
+										        		                
+										        		        		if (db.timeOutCheck(NameLabel.getText(), formattedDates)) {
+										        		        			
+										        		        			System.out.println("pwede kapa mag time Out");
+										        		        			
+										        		        			
+										        		        			try {
+										        		        				
+										        		        				workHours = workHours - tard;
+										        		        				
+//				        				total of yesterday workhours + new work hours
+										        		        				currentWorkHours += workHours;
+										        		        				
+//				        				convert workhours into days
+										        		        				double daysHours = currentWorkHours / 8;
+										        		        				
+//				        				compute the gross pay
+										        		        				Double grossPays = daysHours * rate;
+										        		        				
+//				        				compute net income
+										        		        				
+										        		        				Double netIncomes = grossPays - 159;
+										        		        				
+//				        				get yesterday and add new tardiness
+										        		        				Double currentTardiness =  Double.parseDouble(tardinessResult.getText());
+										        		        				currentTardiness += tard;
+										        		        				
+										        		        
+										        		        				
+//				        				
+										db.updateAttendance(ID, formattedDates,timeOut,workHours);
+										db.updateEmployeePayrol_History(String.valueOf(ID), currentWorkHours, currentTardiness, 159, grossPays, netIncomes);
+										
+//								        get the workhours and tardiness result yesterday
+										        		        db.showEmployeePayrol_History(String.valueOf(ID), regularResult, tardinessResult, grosspayResult, netIncomeResult);
+										        		        				
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+//				        			
+										        		        			
+										        		        		};
+										        		        		
+										        		        	
+										        		        	}
+										        		        });
+										        		        
+										        		        
+										        		        timeOutButton.setHorizontalAlignment(SwingConstants.CENTER);
+										        		        timeOutButton.setForeground(Color.WHITE);
+										        		        timeOutButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+										        		        timeOutButton.setBounds(0, 0, 222, 42);
+										        		        timeOut_2.add(timeOutButton);
+										        		        
+	
+						
+						
+						computation(ID,rate,regularResult,tardinessResult,grosspayResult,netIncomeResult,workDaysLabel,grossPayResultLabel);
 		
 		JLabel EmployeeID = new JLabel(String. valueOf(ID));
 		EmployeeID.setFont(new Font("Segoe UI", Font.PLAIN, 15));
@@ -751,331 +1080,6 @@ public class EMPLOYEE extends JFrame {
 						printSalary.add(printout_salaryButton);
 						
 						db.showPayroll_historyID(comboBox, String.valueOf(ID));
-						
-												
-														        
-						
-														        TimeInOut.setBackground(Color.WHITE);
-														        TimeInOut.setBounds(256, 113, 764, 476);
-														        contentPane.add(TimeInOut);
-														        TimeInOut.setLayout(null);
-														        
-														        JPanel panel = new JPanel();
-														        panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-														        panel.setBounds(401, 120, 353, 199);
-														        TimeInOut.add(panel);
-														        panel.setLayout(null);
-														        
-														        JLabel lblDeducionSummary = new JLabel("Deduction Summary per week");
-														        lblDeducionSummary.setHorizontalAlignment(SwingConstants.CENTER);
-														        lblDeducionSummary.setBounds(10, 11, 333, 27);
-														        lblDeducionSummary.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-														        panel.add(lblDeducionSummary);
-														        
-														        JLabel lblSss = new JLabel("SSS: 99");
-														        lblSss.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        lblSss.setBounds(72, 49, 225, 40);
-														        panel.add(lblSss);
-														        
-														        JLabel lblSss_1 = new JLabel("PhilHealth: 40");
-														        lblSss_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        lblSss_1.setBounds(72, 71, 225, 40);
-														        panel.add(lblSss_1);
-														        
-														        JLabel lblSss_2 = new JLabel("PagIbig: 20");
-														        lblSss_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        lblSss_2.setBounds(72, 97, 225, 40);
-														        panel.add(lblSss_2);
-														        
-														        JLabel lblSss_2_2 = new JLabel("Total Deduction: 159");
-														        lblSss_2_2.setHorizontalAlignment(SwingConstants.CENTER);
-														        lblSss_2_2.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        lblSss_2_2.setBounds(10, 148, 333, 40);
-														        panel.add(lblSss_2_2);
-														        
-														        JPanel totalGross = new JPanel();
-														        totalGross.setLayout(null);
-														        totalGross.setBorder(new LineBorder(new Color(0, 0, 0)));
-														        totalGross.setBounds(10, 120, 353, 214);
-														        TimeInOut.add(totalGross);
-														        
-														        JLabel TotalGrossPay = new JLabel("Total Gross Pay summary");
-														        TotalGrossPay.setHorizontalAlignment(SwingConstants.CENTER);
-														        TotalGrossPay.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-														        TotalGrossPay.setBounds(10, 11, 333, 27);
-														        totalGross.add(TotalGrossPay);
-														        
-														        JLabel workDaysLabel = new JLabel("Total Regular work days: 0");
-														        workDaysLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        workDaysLabel.setBounds(53, 49, 290, 40);
-														        totalGross.add(workDaysLabel);
-														        
-														        JLabel workHoursLabel = new JLabel("Regular Work hours:");
-														        workHoursLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        workHoursLabel.setBounds(53, 71, 162, 40);
-														        totalGross.add(workHoursLabel);
-														        
-														        JLabel totalGrossLabel = new JLabel("Total Gross pay: ");
-														        totalGrossLabel.setHorizontalAlignment(SwingConstants.CENTER);
-														        totalGrossLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        totalGrossLabel.setBounds(10, 171, 333, 40);
-														        totalGross.add(totalGrossLabel);
-														        
-														        JLabel tardinessLabel = new JLabel("LESS: Tardiness Hours: ");
-														        tardinessLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        tardinessLabel.setBounds(53, 95, 174, 40);
-														        totalGross.add(tardinessLabel);
-														        
-														        JLabel rateLabel = new JLabel("Daily Rate: " + db.showSalary(String.valueOf(ID)));
-														        rateLabel.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        rateLabel.setBounds(53, 120, 290, 40);
-														        totalGross.add(rateLabel);
-														        
-														        JLabel tardinessResult = new JLabel("0");
-														        tardinessResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        tardinessResult.setBounds(225, 95, 118, 40);
-														        totalGross.add(tardinessResult);
-														        
-														        JLabel regularResult = new JLabel("0");
-														        regularResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        regularResult.setBounds(210, 71, 133, 40);
-														        totalGross.add(regularResult);
-														        
-														        JLabel grosspayResult = new JLabel("0");
-														        grosspayResult.setFont(new Font("Segoe UI", Font.PLAIN, 17));
-														        grosspayResult.setBounds(236, 171, 107, 40);
-														        totalGross.add(grosspayResult);
-														        
-														        JPanel netIncome = new JPanel();
-														        netIncome.setBorder(new LineBorder(new Color(0, 0, 0)));
-														        netIncome.setBounds(156, 349, 476, 127);
-														        TimeInOut.add(netIncome);
-														        netIncome.setLayout(null);
-														        
-														        JLabel netIncomeLabel = new JLabel("Net Income: ");
-														        netIncomeLabel.setBounds(10, 87, 393, 27);
-														        netIncome.add(netIncomeLabel);
-														        netIncomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-														        netIncomeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-														        
-														        JLabel deductionLabel = new JLabel("LESS: Total Deductions: 159");
-														        deductionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-														        deductionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-														        deductionLabel.setBounds(10, 49, 456, 27);
-														        netIncome.add(deductionLabel);
-														        
-														        JLabel grossPayResultLabel = new JLabel("Total Gross pay: " + grosspayResult.getText());
-														        grossPayResultLabel.setHorizontalAlignment(SwingConstants.CENTER);
-														        grossPayResultLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-														        grossPayResultLabel.setBounds(10, 11, 456, 27);
-														        netIncome.add(grossPayResultLabel);
-														        
-
-														        netIncomeResult.setBounds(259, 87, 207, 27);
-														        netIncome.add(netIncomeResult);
-														        netIncomeResult.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-														        
-														        		        timeIn_2.setLayout(null);
-														        		        timeIn_2.setBorder(new LineBorder(new Color(0, 0, 0)));
-														        		        timeIn_2.setBackground(Color.WHITE);
-														        		        timeIn_2.setBounds(257, 39, 222, 42);
-														        		        TimeInOut.add(timeIn_2);
-														        		        
-														        		        JLabel timeOutButton = new JLabel("Time Out");
-														        		        JLabel timeInButton = new JLabel("Time In");
-														        		        
-														        		        timeInButton.addMouseListener(new MouseAdapter() {
-														        		        	@Override
-														        		        	public void mouseEntered(MouseEvent e) {
-														        		        		timeInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-														        		        	}
-														        		        	
-														        		        	@Override
-														        		        	public void mouseClicked(MouseEvent e) {
-														        		        		
-														        		        		
-														        		        		
-														        		        		timeIn_2.setVisible(false);
-														        		        		timeOut_2.setVisible(true);
-														        		        		
-														        		        		
-														        		        
-														        		        	    // Get the current date
-														        		                Date currentDateNow = calendar.getTime();
-														        		        	
-														        		                
-														        		                // Format the date
-														        		                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
-														        		                String formattedDate = dateFormat.format(currentDateNow);
-														        		                
-														        		          		String date = formattedDate;
-														        		          		
-														        		                // Display the formatted date
-//				                System.out.println("Current Date: " + formattedDate);
-														        		                
-														        		                
-//				          		Time In
-														        		                SimpleDateFormat TimeInFormat = new SimpleDateFormat("hh:mm a");
-														        		                String timeIn = TimeInFormat.format(calendar.getTime());
-														        		                
-														        		                String timeOut = "N/A";
-														        		                
-														        		                int workHours = 0;
-														        		                
-														        		             // Get the current time
-														        		                LocalTime currentTime = LocalTime.now();
-
-														        		                // Set the ideal time to 8:00 AM
-														        		                LocalTime idealTime = LocalTime.of(8, 0, 0);
-
-														        		                // Calculate the time difference in minutes
-														        		                long minutesLate = ChronoUnit.MINUTES.between(idealTime, currentTime);
-
-				      
-			                    double tardiness = (minutesLate / 60.0);
-			                    
-			        			try {
-			        				
-			        				if (db.timeInCheck(NameLabel.getText(), formattedDate) == false) {
-			        					db.addAttendance(ID, date, NameLabel.getText(), timeIn, timeOut, workHours, tardiness);
-					        		}
-			        				
-//			        				db.addAttendance(ID, date, NameLabel.getText(), timeIn, timeOut, workHours, tardiness);
-			        				
-								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-			                    System.out.println(tardiness);
-
-		
-														        		        		
-														        		        	}
-														        		        });
-														        		        
-														        		        timeInButton.setHorizontalAlignment(SwingConstants.CENTER);
-														        		        timeInButton.setForeground(Color.BLACK);
-														        		        timeInButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-														        		        timeInButton.setBackground(Color.WHITE);
-														        		        timeInButton.setBounds(0, 0, 222, 42);
-														        		        timeIn_2.add(timeInButton);
-														        		        
-			
-														        		        
-														        		        timeOut_2.setLayout(null);
-														        		        timeOut_2.setBackground(Color.BLACK);
-														        		        timeOut_2.setBounds(257, 39, 222, 42);
-														        		        TimeInOut.add(timeOut_2);
-														        		        
-														        		        
-														        		        timeOutButton.addMouseListener(new MouseAdapter() {
-														        		        	@Override
-														        		        	public void mouseEntered(MouseEvent e) {
-														        		        		timeOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-														        		        	}
-														        		        	
-														        		        	@Override
-														        		        	public void mouseClicked(MouseEvent e) {
-														        		        		
-														        		        		timeIn_2.setVisible(true);
-														        		        		timeOut_2.setVisible(false);
-														        		        		
-//				          		Time Out
-														        		                SimpleDateFormat timeOutFormat = new SimpleDateFormat("hh:mm a");
-														        		                
-														        		                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
-														        		                
-														        		                String timeOut = timeOutFormat.format(calendar.getTime());
-														        		        		
-														        		                LocalTime enterTime = LocalTime.of(8, 0, 0);
-														        		                LocalTime timeOuts = LocalTime.parse(timeOut,formatter);
-														        		                
-
-														        		                // Calculate the duration between clock in and clock out times
-														        		                Duration workedDuration = Duration.between(enterTime, timeOuts);
-														        		                
-														        		                // Adjust worked hours if time-out is after 7 PM
-														        		                if (timeOuts.isAfter(LocalTime.of(17, 0, 0))) {
-														        		                    workedDuration = Duration.ofHours(8);
-														        		                }
-														        		                
-														        		                
-//				                work hours
-														        		                double workHours = (workedDuration.toMinutes()/60.0);
-														        		                double currentWorkHours = Double.parseDouble(regularResult.getText());
-														        		                
-														        		                
-//				                get the current work hours
-														        		                
-
-														        		        		// Format the date
-														        		                SimpleDateFormat dateFormats = new SimpleDateFormat("yyyy-dd-MM");
-														        		                String formattedDates = dateFormats.format(currentDate);
-														        		        		
-//			
-//				                rate;
-														        		                
-														        		                Double tard = db.getEmployeeTardiness(ID, formattedDates);
-		
-														        		                
-														        		        		if (db.timeOutCheck(NameLabel.getText(), formattedDates)) {
-														        		        			
-														        		        			System.out.println("pwede kapa mag time Out");
-														        		        			
-														        		        			
-														        		        			try {
-														        		        				
-														        		        				workHours = workHours - tard;
-														        		        				
-//				        				total of yesterday workhours + new work hours
-														        		        				currentWorkHours += workHours;
-														        		        				
-//				        				convert workhours into days
-														        		        				double daysHours = currentWorkHours / 8;
-														        		        				
-//				        				compute the gross pay
-														        		        				Double grossPays = daysHours * rate;
-														        		        				
-//				        				compute net income
-														        		        				
-														        		        				Double netIncomes = grossPays - 159;
-														        		        				
-//				        				get yesterday and add new tardiness
-														        		        				Double currentTardiness =  Double.parseDouble(tardinessResult.getText());
-														        		        				currentTardiness += tard;
-														        		        				
-														        		        
-														        		        				
-//				        				
-										db.updateAttendance(ID, formattedDates,timeOut,workHours);
-										db.updateEmployeePayrol_History(String.valueOf(ID), currentWorkHours, currentTardiness, 159, grossPays, netIncomes);
-										
-//								        get the workhours and tardiness result yesterday
-														        		        db.showEmployeePayrol_History(String.valueOf(ID), regularResult, tardinessResult, grosspayResult, netIncomeResult);
-														        		        				
-									} catch (SQLException e1) {
-										// TODO Auto-generated catch block
-										e1.printStackTrace();
-									}
-//				        			
-														        		        			
-														        		        		};
-														        		        		
-														        		        	
-														        		        	}
-														        		        });
-														        		        
-														        		        
-														        		        timeOutButton.setHorizontalAlignment(SwingConstants.CENTER);
-														        		        timeOutButton.setForeground(Color.WHITE);
-														        		        timeOutButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-														        		        timeOutButton.setBounds(0, 0, 222, 42);
-														        		        timeOut_2.add(timeOutButton);
-														        		        
-	
-						
-						
-						computation(ID,rate,regularResult,tardinessResult,grosspayResult,netIncomeResult,workDaysLabel,grossPayResultLabel);
 						
 						
 //		db.timeOutCheck(NameLabel, );

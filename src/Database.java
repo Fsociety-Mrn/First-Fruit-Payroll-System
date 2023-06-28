@@ -381,32 +381,56 @@ public class Database {
       } 
     }
     
-//  check TimeIn 
-  public boolean timeInCheck(String Name,String Date){
-      try{
-          String query = "SELECT `ID` FROM " + 
-                  "`attendance`" + " WHERE Name='"+ Name + "' AND date='" + Date + "'";
-          ResultSet result =  getConnected().executeQuery(query);
-          int ID = 0;
-          while(result.next()){
-              ID = result.getInt("ID");
-          }
-          if(ID != 0){
-              System.out.println("time in");
-              conn.close();
-              return true;
-          }else{
-              System.out.println("already time in");
-              conn.close();
-              return false;
-          }
-          
-          
-      }catch(Exception e){
-          System.out.println(e);
-          return false;
-      } 
-  }
+ // check TimeIn 
+    public boolean timeInCheck(String Name, String Date) {
+//        try {
+//            String query = "SELECT `ID` FROM `attendance` WHERE Name='" + Name + "' AND date='" + Date + "'";
+//            ResultSet result = getConnected().executeQuery(query);
+//
+//            boolean hasNullID = true;
+//            while (result.next()) {
+//                int ID = result.getInt("ID");
+//                if (!result.wasNull()) {
+//                    hasNullID = false;
+//                    System.out.println("time in");
+//                } else {
+//                    System.out.println("ID is NULL");
+//                }
+//            }
+//
+//            conn.close();
+//            return hasNullID;
+//        } catch (Exception e) {
+//            System.out.println(e);
+//            return false;
+//        }
+    	
+    	 try{
+             String query = "SELECT `ID` FROM " + 
+                     "`attendance`" + " WHERE Name='"+ Name + "' AND date='" + Date + "'";
+             ResultSet result =  getConnected().executeQuery(query);
+             int ID = 0;
+             while(result.next()){
+                 ID = result.getInt("ID");
+             }
+             if(ID != 0){
+                 System.out.println("time in");
+                 conn.close();
+                 return true;
+             }else{
+                 System.out.println("already time in");
+                 conn.close();
+                 return false;
+             }
+             
+             
+         }catch(Exception e){
+             System.out.println(e);
+             return false;
+         } 
+    }
+
+
   
   
 //getEmployeeTardiness
@@ -443,7 +467,7 @@ public boolean timeOutCheck(String Name,String Date){
         	timeOut = result.getString("TimeOut");
         }
         
-        System.out.println(timeOut);
+        
         
         if(timeOut.equals("N/A")){
             System.out.println("time out");
@@ -458,7 +482,9 @@ public boolean timeOutCheck(String Name,String Date){
         
     }catch(Exception e){
         System.out.println(e);
-        return false;
+        
+       
+        return true;
     } 
 }
   

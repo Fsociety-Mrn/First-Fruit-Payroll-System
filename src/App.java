@@ -40,10 +40,7 @@ public class App {
 //			create employee payroll History
 			db.showEmployeeID();
 			
-//			db.updateEmployeePayrol_History("1", 0.1, 0.1, 0.1, 0.1, 0.1);
-//			db.showEmployeePayrol_History("1");
-//			db.showSalary("1");
-//			db.addAttendance(0, "hello", "friend", "hello", "friend", 0, 0);
+			System.out.println(db.timeInCheck("1", "2023-28-06"));
 			
 
 		} catch (SQLException e) {
@@ -52,7 +49,7 @@ public class App {
 		}
 		
 		new Login().setVisible(true);
-//		new EMPLOYEE().setVisible(true);
+////		new EMPLOYEE().setVisible(true);
 
 	}
 
