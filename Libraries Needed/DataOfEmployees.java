@@ -154,12 +154,40 @@ public class DataOfEmployees {
 		
 		// Set model
 		table.setModel(tableModel);
+			String ID, 
+			String Name,
+			
+			String workHourss,
+			String workDayss,
+			String tard, 
+			String rate,
+			String grossPayss,
+			
+			
+			String netIncomes,
+			String totalGrossPay
+			
+								generatePayrollPDF(
+										String.valueOf(ID),
+										NameLabel.getText(),
+										
+							            regularResult_1.getText(),
+										workDaysLabel_1.getText(),
+							            tardinessResult_1.getText(),
+										rateLabel_1.getText(),
+							            grosspayResult_1.getText(),
+							            
+										grossPayResultLabel_1.getText(),
+							            netIncomeResult_1.getText()
+																	
+																	
+									);
+
 		
 		return table;
 	}
 	
 	//Import data from system
-
 	private Table generatePayrollTableByPosition(DefaultTableModel tableModel, String tableTitle) {
 		Table pdfTable = new Table(7).useAllAvailableWidth();
         pdfTable.setMarginTop(0);

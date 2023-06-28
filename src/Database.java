@@ -10,7 +10,9 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -407,7 +409,7 @@ public class Database {
   }
   
   
-//check TimeIn 
+//getEmployeeTardiness
 public double getEmployeeTardiness(int ID,String Date){
     try{
         String query = "SELECT `tardiness` FROM " + 
@@ -509,33 +511,29 @@ public boolean timeOutCheck(String Name,String Date){
     }
     
     
-//  get all rows in employee tables
-  public void showAttendance_dATE(JComboBox<String> jComboBox1) {
-  	
-  	
-      try{
-          
-          ArrayList<String> weeklyIDs = new ArrayList<String>();
-          
-          String query = "SELECT `date` FROM `attendance`";
-          ResultSet result = getConnected().executeQuery(query);
-          while(result.next()){
-          	System.out.println(result.getString("date"));
-          	weeklyIDs.add(result.getString("date"));
-          }
-          
-          conn.close();
-          
-          jComboBox1.removeAllItems();
-          
-          weeklyIDs.forEach(item->jComboBox1.addItem(item));
+    public void showAttendance_dATE(JComboBox<String> jComboBox1) {
+        try {
+            ArrayList<String> weeklyIDs = new ArrayList<String>();
 
-          
-      }catch(Exception e){
-          System.out.println(e);
-      }
-  	
-  }
+            String query = "SELECT DISTINCT `date` FROM `attendance`";  // Use DISTINCT keyword to select unique dates
+            ResultSet result = getConnected().executeQuery(query);
+            while (result.next()) {
+                weeklyIDs.add(result.getString("date"));
+            }
+
+            conn.close();
+
+            jComboBox1.removeAllItems();
+
+            // Remove duplicates using a Set
+            Set<String> uniqueItems = new HashSet<>(weeklyIDs);
+            uniqueItems.forEach(item -> jComboBox1.addItem(item));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     
     // SHOW ALL ROWS IN Attenadcane Table
     public void showRows_Attendace(JTable table, String date){
@@ -557,6 +555,15 @@ public boolean timeOutCheck(String Name,String Date){
                 		result.getString("workHours"),
                 		result.getString("tardiness")
                 	};
+                
+                System.out.println(result.getString("employID"));
+                System.out.println(result.getString("Name"));
+                System.out.println(result.getString("TimeIn"));
+                System.out.println(result.getString("TimeOut"));
+                System.out.println(result.getString("workHours"));
+                System.out.println(result.getString("tardiness"));
+      
+                
                 tblmodel.addRow(data);
                 
                 
@@ -752,7 +759,9 @@ public boolean timeOutCheck(String Name,String Date){
             		tardiness.setText(result.getString("tardiness"));
             		grossPay.setText(result.getString("totalGrossPay"));
             		netIncome.setText(result.getString("netIncome"));
+            		
             	
+            		
 
             	}            
             
@@ -816,7 +825,9 @@ public boolean timeOutCheck(String Name,String Date){
             		workDays.setText("Total Regular work days: " + String.valueOf(workDaysss));
             		
             		workHours.setText(result.getString("workHours"));
+            		
             		tardiness.setText(result.getString("tardiness"));
+            		
             		grossPay.setText(result.getString("totalGrossPay"));
             		netIncome.setText(result.getString("netIncome"));
             	

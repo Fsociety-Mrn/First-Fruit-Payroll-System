@@ -43,7 +43,6 @@ public class App {
 //			db.updateEmployeePayrol_History("1", 0.1, 0.1, 0.1, 0.1, 0.1);
 //			db.showEmployeePayrol_History("1");
 //			db.showSalary("1");
-			
 //			db.addAttendance(0, "hello", "friend", "hello", "friend", 0, 0);
 			
 

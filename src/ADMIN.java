@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -7,7 +8,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,40 +18,56 @@ import java.awt.Image;
 
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+
 import java.sql.SQLException;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
+
+
+import com.itextpdf.io.exceptions.IOException;
+
+//PDF
+import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.properties.TextAlignment;
+
+
+
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import java.util.Date;
 import java.util.Calendar;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.Timer;
 
 
 public class ADMIN extends JFrame {
 	
-	private Database db = new Database();
 
-	private JPanel contentPane;
-	private JTable employeeListTable;
-	private JTextField NameTextfield;
-	private JTextField rate;
-	private JTable employeeAttendance;
+	
+	
+	
 	
 	/**
 	 * Launch the application.
@@ -73,9 +90,130 @@ public class ADMIN extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ADMIN() {
+	
+    private JComboBox comboBox_1 = new JComboBox<String>();
+	private Database db = new Database();
+
+	private JPanel contentPane;
+	private JTable employeeListTable;
+	private JTextField NameTextfield;
+	private JTextField rate;
+	private JTable employeeAttendance;
+	private  JPanel EmployeeAttendance = new JPanel();
+	
+	private Object [] tableColumnHeaders = {"employee ID", "Name"};
+	
+	//Import data from system
+	private Table generatePayrollTableByPosition(DefaultTableModel tableModel, String tableTitle) {
+	    Table pdfTable = new Table(2).useAllAvailableWidth();
+	    pdfTable.setMarginTop(0);
+	    pdfTable.setMarginBottom(20);
+
+	    // Table main header
+	    Cell cell = new Cell(1, 7).add(new Paragraph(tableTitle));
+	    cell.setTextAlignment(TextAlignment.CENTER);
+	    cell.setPadding(5);
+	    cell.setBackgroundColor(new DeviceRgb(209, 200, 234));
+	    pdfTable.addCell(cell);
+
+	    // Generate first row for table header
+	    for (int i = 0; i < tableColumnHeaders.length; i++) {
+	        pdfTable.addCell(tableColumnHeaders[i].toString());
+	    }
+
+	    // Generate rows based on table model
+	    for (int j = 0; j < tableModel.getRowCount(); j++) {
+	        for (int i = 0; i < tableColumnHeaders.length; i++) {
+	            String rowData = tableModel.getValueAt(j, i).toString();
+	            pdfTable.addCell(rowData);
+	        }
+	    }
+
+	    // Check if the last row has fewer cells
+	    int lastRowCellCount = pdfTable.getNumberOfColumns();
+	    int expectedCellCount = tableColumnHeaders.length;
+	    if (lastRowCellCount < expectedCellCount) {
+	        int emptyCellCount = expectedCellCount - lastRowCellCount;
+	        for (int i = 0; i < emptyCellCount; i++) {
+	            pdfTable.addCell("");
+	        }
+	    }
+
+	    return pdfTable;
+	}
+
+
 		
-		employeeAttendance = new JTable();
+	private void serveFileOnBrowser(File file) throws IOException, java.io.IOException {
+		try {
+			Desktop desktop = Desktop.getDesktop();
+			desktop.open(file);
+		} catch (IOException e) {
+			throw new IOException("Open PDF in Browser: Something went wrong.\n Error: " + e.getMessage());
+		}
+	}
+	
+	
+	private void generatePayrollPDF(JTable table) throws IOException {
+        try {
+        DefaultTableModel tblmodel = (DefaultTableModel)table.getModel();
+		
+		LocalDateTime dateNowTime = LocalDateTime.now();
+		System.out.println(dateNowTime.toString());
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM dd, YYYY");
+		DateTimeFormatter fileDateFormatter = DateTimeFormatter.ofPattern("MMMM_dd_YYYY_hh_mm_ss_a_n");
+		
+		String exportDate = dateNowTime.format(dateFormatter).toString();
+		String fileExportDate = dateNowTime.format(fileDateFormatter).toString();
+		
+		String fileName = "Payroll_Export_" + fileExportDate + ".pdf";
+		String fileDest = "pdfs/" + fileName;
+		
+		File file = new File(fileDest);
+        file.getParentFile().mkdirs();
+        
+        // Initialize PDF writer
+        PdfWriter writer = new PdfWriter(fileDest);
+
+        //Initialize PDF document
+        PdfDocument pdf = new PdfDocument(writer);
+
+        // Initialize document
+        Document document = new Document(pdf, new PageSize(595, 842));
+        
+        
+        Paragraph headerText = new Paragraph("First Fruit Telecom Payroll System ").setFontSize(24);
+        document.add(headerText);
+        
+        Paragraph dateText = new Paragraph("Export Date: " + exportDate);
+        document.add(dateText);
+        
+        // Employee List
+        Table fullTimeEmployeesTable = generatePayrollTableByPosition(
+        		tblmodel,
+        		"Employee List"
+        );
+        document.add(fullTimeEmployeesTable);
+        
+
+        
+        
+        //Close document
+        document.close();
+        
+        // Serve PDF on the default browser
+
+			serveFileOnBrowser(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ADMIN() {
         JPanel EmployeeList = new JPanel();
         JPanel AddEmployee = new JPanel();
 		
@@ -124,39 +262,6 @@ public class ADMIN extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JPanel EmployeeAttendance = new JPanel();
-		
-	
-		EmployeeAttendance.setBounds(256, 113, 764, 476);
-		contentPane.add(EmployeeAttendance);
-		EmployeeAttendance.setLayout(null);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 58, 744, 407);
-		EmployeeAttendance.add(scrollPane_1);
-		
-
-		employeeAttendance.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"employee ID", "Name", "Time In", "Time Out", "work hours", "tardiness"
-			}
-		));
-		scrollPane_1.setViewportView(employeeAttendance);
-		
-		var comboBox_1 = new JComboBox<String>();
-		comboBox_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//		        show all dates
-		       db.showAttendance_dATE(comboBox_1);
-		       db.showRows_Attendace(employeeAttendance, String.valueOf(comboBox_1.getSelectedObjects()));
-			}
-		});
-		comboBox_1.setBackground(Color.WHITE);
-		comboBox_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
-		comboBox_1.setBounds(210, 11, 277, 36);
-		EmployeeAttendance.add(comboBox_1);
 		
 //        JPanel EmployeeList = new JPanel();
 //        JPanel AddEmployee = new JPanel();
@@ -254,9 +359,13 @@ public class ADMIN extends JFrame {
 		        EmployeeAttendance.setVisible(true);
 		        
 		       
-//		        show all dates
+//		        show all dates and show the data on tables
 		       db.showAttendance_dATE(comboBox_1);
-		       db.showRows_Attendace(employeeAttendance, String.valueOf(comboBox_1.getSelectedObjects()));
+		       
+		       
+//		       String curren_date = String.valueOf(comboBox_1.getSelectedItem());
+//		       System.out.println(curren_date);
+//		       db.showRows_Attendace(employeeAttendance,curren_date);
 			}
 			
 			@Override
@@ -313,7 +422,7 @@ public class ADMIN extends JFrame {
 		DATE.setHorizontalAlignment(SwingConstants.CENTER);
 				
 				JLabel brandTitle = new JLabel();
-				brandTitle.setBounds(533, 11, 222, 108);
+				brandTitle.setBounds(533, 11, 222, 97);
 				contentPane.add(brandTitle);
 				brandTitle.setPreferredSize(new Dimension(230, 130)); // Set a preferred size for the label
 				
@@ -384,6 +493,16 @@ public class ADMIN extends JFrame {
         	EmployeeList.add(printtmployeeButton);
         	
         	JLabel printEmployee = new JLabel("Print");
+        	printEmployee.addMouseListener(new MouseAdapter() {
+        		@Override
+        		public void mouseClicked(MouseEvent e) {
+        			generatePayrollPDF(employeeListTable);
+        		}
+        		@Override
+        		public void mouseExited(MouseEvent e) {
+        			printEmployee.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        		}
+        	});
         	printEmployee.setHorizontalAlignment(SwingConstants.CENTER);
         	printEmployee.setForeground(Color.WHITE);
         	printEmployee.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -582,8 +701,51 @@ public class ADMIN extends JFrame {
         		        comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         		        comboBox.setBounds(177, 218, 425, 40);
         		        AddEmployee.add(comboBox);
+        		        
+        		        employeeAttendance = new JTable();
+ 
+        		        
+	
+        		        EmployeeAttendance.setBounds(256, 113, 764, 476);
+        		        contentPane.add(EmployeeAttendance);
+        		        EmployeeAttendance.setLayout(null);
+        		        
+        		        JScrollPane scrollPane_1 = new JScrollPane();
+        		        scrollPane_1.setBounds(10, 58, 744, 407);
+        		        EmployeeAttendance.add(scrollPane_1);
+        		        
+
+        		        employeeAttendance.setModel(new DefaultTableModel(
+        		        	new Object[][] {
+        		        	},
+        		        	new String[] {
+        		        		"employee ID", "Name", "Time In", "Time Out", "work hours", "tardiness"
+        		        	}
+        		        ));
+        		        scrollPane_1.setViewportView(employeeAttendance);
+        		        
+        		   
+        		        comboBox_1.addActionListener(new ActionListener() {
+        		        	public void actionPerformed(ActionEvent e) {
+//		        show all dates
+//		       db.showAttendance_dATE(comboBox_1);
+        		               
+        		               
+        		               String curren_date = String.valueOf(comboBox_1.getSelectedItem());
+        		               System.out.println(curren_date);
+//		       
+        		               db.showRows_Attendace(employeeAttendance, curren_date);
+        		        	}
+        		        });
+        		        comboBox_1.setBackground(Color.WHITE);
+        		        comboBox_1.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        		        comboBox_1.setBounds(210, 11, 277, 36);
+        		        EmployeeAttendance.add(comboBox_1);
+        		        EmployeeAttendance.setVisible(false);
 				        
-				        EmployeeList.setVisible(true);
+				     
+					    EmployeeList.setVisible(true);
+				        AddEmployee.setVisible(false);
 						
 						
 						
